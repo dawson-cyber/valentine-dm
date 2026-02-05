@@ -5,45 +5,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>💖 Oui ! 💖</title>
 <style>
-body {
+/* Reset et base responsive */
+* {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
   background: linear-gradient(135deg, #ffccd5 0%, #ff8fab 50%, #ff4d6d 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
   position: relative;
+  padding: 20px;
 }
 
 .container {
   text-align: center;
   z-index: 10;
   position: relative;
-  padding: 40px;
+  padding: clamp(30px, 5vw, 40px);
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(10px);
-  border-radius: 30px;
+  border-radius: clamp(25px, 4vw, 30px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.3);
   animation: float 3s ease-in-out infinite;
+  width: min(95%, 900px);
+  margin: 20px 0;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(clamp(-10px, -2vw, -20px)); }
 }
 
 h1 {
   color: white;
-  font-size: 4.5rem;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
   text-align: center;
   text-shadow: 0 0 20px #e60039, 0 0 40px #ff1e4d;
   margin: 0;
-  padding: 20px;
-  letter-spacing: 2px;
+  padding: clamp(15px, 3vw, 20px);
+  letter-spacing: clamp(1px, 0.5vw, 2px);
   animation: glow 2s ease-in-out infinite alternate;
+  line-height: 1.2;
 }
 
 @keyframes glow {
@@ -53,8 +63,8 @@ h1 {
 
 .subtitle {
   color: white;
-  font-size: 2rem;
-  margin-top: 20px;
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  margin-top: clamp(15px, 3vw, 20px);
   opacity: 0.9;
   font-weight: 300;
   animation: fadeIn 2s ease-in-out;
@@ -67,18 +77,20 @@ h1 {
 
 .message {
   color: white;
-  font-size: 1.5rem;
-  margin-top: 30px;
-  padding: 20px;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  margin-top: clamp(20px, 4vw, 30px);
+  padding: clamp(15px, 3vw, 20px);
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
+  border-radius: clamp(15px, 3vw, 20px);
   max-width: 600px;
   line-height: 1.6;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .heart-burst {
   position: absolute;
-  font-size: 30px;
+  font-size: clamp(20px, 4vw, 30px);
   animation: burst 1.5s ease-out forwards;
   z-index: 1;
 }
@@ -95,16 +107,18 @@ h1 {
 }
 
 .floating-hearts {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 1;
+  top: 0;
+  left: 0;
 }
 
 .floating-heart {
   position: absolute;
-  font-size: 40px;
+  font-size: clamp(25px, 5vw, 40px);
   opacity: 0;
   animation: floatUp 8s linear infinite;
 }
@@ -128,12 +142,13 @@ h1 {
 
 .sparkle {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: clamp(6px, 1vw, 10px);
+  height: clamp(6px, 1vw, 10px);
   background: white;
   border-radius: 50%;
   animation: sparkle 1s ease-out infinite;
   box-shadow: 0 0 10px 2px white;
+  z-index: 2;
 }
 
 @keyframes sparkle {
@@ -143,10 +158,11 @@ h1 {
 
 .confetti {
   position: absolute;
-  width: 15px;
-  height: 15px;
+  width: clamp(10px, 2vw, 15px);
+  height: clamp(10px, 2vw, 15px);
   opacity: 0;
   animation: confettiFall 3s linear infinite;
+  z-index: 1;
 }
 
 @keyframes confettiFall {
@@ -161,17 +177,18 @@ h1 {
 }
 
 .return-button {
-  margin-top: 40px;
-  padding: 15px 40px;
+  margin-top: clamp(25px, 5vw, 40px);
+  padding: clamp(12px, 2.5vw, 15px) clamp(25px, 5vw, 40px);
   background: linear-gradient(135deg, #ff4d6d, #ff1e4d);
   color: white;
   border: none;
   border-radius: 50px;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 10px 20px rgba(255, 30, 77, 0.3);
+  display: inline-block;
 }
 
 .return-button:hover {
@@ -183,6 +200,203 @@ h1 {
 .return-button:active {
   transform: scale(0.95);
 }
+
+/* Responsive pour très petits écrans */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 20px;
+    border-radius: 20px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    padding: 10px;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .message {
+    font-size: 1rem;
+    padding: 15px;
+    margin-top: 20px;
+  }
+  
+  .return-button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* Mode paysage sur mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  body {
+    padding: 10px;
+    min-height: auto;
+  }
+  
+  .container {
+    margin: 10px auto;
+    padding: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    padding: 10px;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  
+  .message {
+    font-size: 1rem;
+    margin-top: 15px;
+    padding: 15px;
+  }
+  
+  .return-button {
+    margin-top: 20px;
+    padding: 12px 30px;
+  }
+}
+
+/* Pour tablettes */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    width: min(90%, 800px);
+    padding: 35px;
+  }
+  
+  h1 {
+    font-size: 3.5rem;
+  }
+  
+  .subtitle {
+    font-size: 1.8rem;
+  }
+  
+  .message {
+    font-size: 1.3rem;
+  }
+}
+
+/* Pour ordinateurs */
+@media (min-width: 1025px) {
+  .container {
+    width: min(80%, 1000px);
+  }
+  
+  .container:hover {
+    transform: translateY(-5px) scale(1.02);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Support du thème sombre */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: linear-gradient(135deg, #1a0006 0%, #33000d 50%, #66001a 100%);
+  }
+  
+  .container {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .message {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Optimisation des animations pour mobile */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  h1,
+  .heart-burst,
+  .floating-heart,
+  .sparkle,
+  .confetti {
+    animation: none;
+  }
+  
+  .return-button:hover {
+    transform: none;
+  }
+}
+
+/* Correction pour les écrans très étroits */
+@media (max-width: 350px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+  }
+  
+  .message {
+    font-size: 0.95rem;
+    padding: 12px;
+  }
+}
+
+/* Pour éviter les débordements */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Style pour le bouton de retour */
+.return-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.return-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: 0.5s;
+}
+
+.return-button:hover:before {
+  left: 100%;
+}
+
+/* Amélioration de la performance sur mobile */
+@media (max-width: 768px) {
+  .floating-heart {
+    font-size: 20px;
+  }
+  
+  .heart-burst {
+    font-size: 18px;
+  }
+  
+  .confetti {
+    width: 8px;
+    height: 8px;
+  }
+}
+
+/* Animation de transition pour les messages */
+.message-transition {
+  transition: opacity 0.5s ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -190,68 +404,101 @@ h1 {
 <div class="container">
   <h1>💖 Elle a dit OUI ! 💖</h1>
   <div class="subtitle">Le plus beau "oui" du monde !</div>
-  <div class="message">
+  <div class="message" id="message">
     Une histoire d'amour commence aujourd'hui...<br>
     Que chaque jour soit rempli de rires, de câlins<br>
     et de moments magiques ensemble !
   </div>
+  
+  <button class="return-button" onclick="window.location.href='index.html'">
+    ← Retour à la carte
+  </button>
 </div>
 
 <div class="floating-hearts" id="floatingHearts"></div>
 
 <script>
-// Explosion de cœurs
-for(let i = 0; i < 80; i++){
-  const heart = document.createElement("div");
-  heart.className = "heart-burst";
-  heart.innerText = "💖";
-  heart.style.left = window.innerWidth/2 + "px";
-  heart.style.top = window.innerHeight/2 + "px";
-  heart.style.color = getRandomColor();
-  heart.style.setProperty("--x", (Math.random()*1000-500) + "px");
-  heart.style.setProperty("--y", (Math.random()*-800-200) + "px");
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 1500);
+// Détection du device pour optimiser les performances
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+const isLowPerformance = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// Fonction pour générer des couleurs aléatoires pastel
+function getRandomColor() {
+  const colors = [
+    "#ff4d6d", "#ff8fab", "#ffccd5", "#ffb3c6",
+    "#ff6b9d", "#ff85a1", "#ff477e", "#ff5d8f",
+    "#ff97b7", "#ffacc5", "#ffcad4"
+  ];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Adapte le nombre d'éléments selon le device
+const heartCount = isMobile ? 40 : 80;
+const floatingHeartCount = isMobile ? 12 : 20;
+const confettiCount = isMobile ? 50 : 100;
+const sparkleCount = isMobile ? 25 : 50;
+
+// Explosion de cœurs (avec optimisation mobile)
+if (!isLowPerformance) {
+  for(let i = 0; i < heartCount; i++){
+    const heart = document.createElement("div");
+    heart.className = "heart-burst";
+    heart.innerText = "💖";
+    heart.style.left = window.innerWidth/2 + "px";
+    heart.style.top = window.innerHeight/2 + "px";
+    heart.style.color = getRandomColor();
+    heart.style.setProperty("--x", (Math.random()*1000-500) + "px");
+    heart.style.setProperty("--y", (Math.random()*-800-200) + "px");
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1500);
+  }
 }
 
 // Cœurs flottants
 const floatingHearts = document.getElementById("floatingHearts");
-for(let i = 0; i < 20; i++){
-  const heart = document.createElement("div");
-  heart.className = "floating-heart";
-  heart.innerText = ["💖", "💗", "💓", "💕"][Math.floor(Math.random()*4)];
-  heart.style.left = Math.random() * 100 + "%";
-  heart.style.color = getRandomColor();
-  heart.style.animationDelay = Math.random() * 5 + "s";
-  heart.style.fontSize = (Math.random() * 30 + 20) + "px";
-  floatingHearts.appendChild(heart);
+if (!isLowPerformance) {
+  for(let i = 0; i < floatingHeartCount; i++){
+    const heart = document.createElement("div");
+    heart.className = "floating-heart";
+    heart.innerText = ["💖", "💗", "💓", "💕"][Math.floor(Math.random()*4)];
+    heart.style.left = Math.random() * 100 + "%";
+    heart.style.color = getRandomColor();
+    heart.style.animationDelay = Math.random() * 5 + "s";
+    heart.style.fontSize = (Math.random() * 20 + (isMobile ? 15 : 20)) + "px";
+    floatingHearts.appendChild(heart);
+  }
 }
 
 // Confettis
-for(let i = 0; i < 100; i++){
-  const confetti = document.createElement("div");
-  confetti.className = "confetti";
-  confetti.style.left = Math.random() * 100 + "%";
-  confetti.style.backgroundColor = getRandomColor();
-  confetti.style.animationDelay = Math.random() * 3 + "s";
-  confetti.style.width = Math.random() * 15 + 5 + "px";
-  confetti.style.height = Math.random() * 15 + 5 + "px";
-  document.body.appendChild(confetti);
+if (!isLowPerformance) {
+  for(let i = 0; i < confettiCount; i++){
+    const confetti = document.createElement("div");
+    confetti.className = "confetti";
+    confetti.style.left = Math.random() * 100 + "%";
+    confetti.style.backgroundColor = getRandomColor();
+    confetti.style.animationDelay = Math.random() * 3 + "s";
+    confetti.style.width = (Math.random() * 10 + (isMobile ? 3 : 5)) + "px";
+    confetti.style.height = (Math.random() * 10 + (isMobile ? 3 : 5)) + "px";
+    document.body.appendChild(confetti);
+  }
 }
 
 // Étincelles autour du texte
-for(let i = 0; i < 50; i++){
-  const sparkle = document.createElement("div");
-  sparkle.className = "sparkle";
-  sparkle.style.left = Math.random() * 100 + "%";
-  sparkle.style.top = Math.random() * 100 + "%";
-  sparkle.style.animationDelay = Math.random() * 2 + "s";
-  document.body.appendChild(sparkle);
+if (!isLowPerformance) {
+  for(let i = 0; i < sparkleCount; i++){
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    sparkle.style.left = Math.random() * 100 + "%";
+    sparkle.style.top = Math.random() * 100 + "%";
+    sparkle.style.animationDelay = Math.random() * 2 + "s";
+    document.body.appendChild(sparkle);
+  }
 }
 
 // Musique d'ambiance (optionnelle)
 function playCelebrationSound() {
-  // Créer un contexte audio simple pour des bips festifs
+  if (isMobile) return; // Éviter les sons automatiques sur mobile
+  
   try {
     const audioContext = new (window.AudioContext || window.webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
@@ -270,21 +517,13 @@ function playCelebrationSound() {
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.5);
   } catch (e) {
-    console.log("Audio non supporté ou bloqué");
+    // Audio non supporté
   }
 }
 
-// Jouer le son au chargement
-setTimeout(playCelebrationSound, 500);
-
-// Fonction pour générer des couleurs aléatoires pastel
-function getRandomColor() {
-  const colors = [
-    "#ff4d6d", "#ff8fab", "#ffccd5", "#ffb3c6",
-    "#ff6b9d", "#ff85a1", "#ff477e", "#ff5d8f",
-    "#ff97b7", "#ffacc5", "#ffcad4"
-  ];
-  return colors[Math.floor(Math.random() * colors.length)];
+// Jouer le son au chargement (seulement sur desktop)
+if (!isMobile) {
+  setTimeout(playCelebrationSound, 500);
 }
 
 // Message de félicitations qui change toutes les 3 secondes
@@ -296,18 +535,101 @@ const messages = [
   "Soyez heureux à jamais !"
 ];
 
-const messageElement = document.querySelector('.message');
+const messageElement = document.getElementById('message');
 let messageIndex = 0;
 
-setInterval(() => {
-  messageIndex = (messageIndex + 1) % messages.length;
-  messageElement.style.opacity = 0;
+if (!isLowPerformance) {
+  setInterval(() => {
+    messageIndex = (messageIndex + 1) % messages.length;
+    messageElement.style.opacity = 0;
+    setTimeout(() => {
+      messageElement.innerHTML = messages[messageIndex] + "<br>💖💖💖";
+      messageElement.style.opacity = 1;
+      messageElement.classList.add('message-transition');
+    }, 500);
+  }, 3000);
+}
+
+// Gestion du redimensionnement
+function handleResize() {
+  // Réajuster les positions si nécessaire
+  const hearts = document.querySelectorAll('.heart-burst');
+  hearts.forEach(heart => {
+    heart.style.left = window.innerWidth/2 + "px";
+    heart.style.top = window.innerHeight/2 + "px";
+  });
+}
+
+// Écouter le redimensionnement avec debounce
+let resizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(handleResize, 250);
+});
+
+// Gestion de l'orientation
+window.addEventListener('orientationchange', function() {
   setTimeout(() => {
-    messageElement.innerHTML = messages[messageIndex] + "<br>💖💖💖";
-    messageElement.style.opacity = 1;
-    messageElement.style.transition = "opacity 1s";
-  }, 500);
-}, 3000);
+    handleResize();
+    // Recalculer la taille des éléments si nécessaire
+    const container = document.querySelector('.container');
+    container.style.animation = 'none';
+    setTimeout(() => {
+      container.style.animation = 'float 3s ease-in-out infinite';
+    }, 10);
+  }, 100);
+});
+
+// Touch-friendly pour mobile
+if (isMobile) {
+  // Augmenter la zone cliquable des boutons
+  const button = document.querySelector('.return-button');
+  button.style.minHeight = '44px';
+  button.style.display = 'flex';
+  button.style.alignItems = 'center';
+  button.style.justifyContent = 'center';
+  
+  // Désactiver certaines animations gourmandes
+  const floatingHearts = document.querySelectorAll('.floating-heart');
+  floatingHearts.forEach((heart, index) => {
+    if (index > 6) {
+      heart.style.display = 'none';
+    }
+  });
+}
+
+// Animation de bienvenue
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.container');
+  container.style.opacity = '0';
+  container.style.transform = 'scale(0.8)';
+  
+  setTimeout(() => {
+    container.style.transition = 'opacity 1s, transform 1s';
+    container.style.opacity = '1';
+    container.style.transform = 'scale(1)';
+  }, 300);
+});
+
+// Optimisation pour les appareils à faible puissance
+if (window.matchMedia('(max-width: 768px)').matches) {
+  // Réduire les effets sur mobile
+  document.querySelectorAll('.sparkle').forEach(sparkle => {
+    if (Math.random() > 0.5) {
+      sparkle.style.display = 'none';
+    }
+  });
+}
+
+// Ajouter une animation CSS pour le fadeOut
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeOut {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.5); }
+  }
+`;
+document.head.appendChild(style);
 </script>
 
 </body>
