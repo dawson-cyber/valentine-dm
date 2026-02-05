@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖 Oui ! 💖</title>
+<style>
+body{margin:0;height:100vh;background:#ffccd5;display:flex;justify-content:center;align-items:center;overflow:hidden;font-family:'Segoe UI', sans-serif;}
+h1{color:white;font-size:3rem;text-align:center;text-shadow:0 0 10px #e60039;}
+.explosion{position:absolute;font-size:20px;animation:explode 1s forwards;}
+@keyframes explode{
+  0%{transform:translate(0,0) scale(1); opacity:1;}
+  100%{transform:translate(var(--x),var(--y)) scale(2); opacity:0;}
+}
+</style>
+</head>
+<body>
+<h1>💖 Elle a dit OUI ! 💖</h1>
+<script>
+for(let i=0;i<50;i++){
+  const c=document.createElement("div");
+  c.className="explosion";
+  c.innerText="💖";
+  c.style.left=window.innerWidth/2+"px";
+  c.style.top=window.innerHeight/2+"px";
+  c.style.setProperty("--x",(Math.random()*800-400)+"px");
+  c.style.setProperty("--y",(Math.random()*-800)+"px");
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(),1000);
+}
+</script>
+</body>
+</html>

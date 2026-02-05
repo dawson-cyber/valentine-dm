@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Valentine 💗</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:radial-gradient(circle at top,#ffd6e0,#ff8fab);
+  font-family:'Segoe UI', sans-serif;
+  overflow:hidden;
+}
+
+.bear{
+  position:relative;
+  width:300px;
+  max-width:80vw;
+  height:400px;
+}
+
+.head{ width:80%; height:50%; background:#8b5e3c; border-radius:50%; position:absolute; top:0; left:10%; }
+.ear{ width:30%; height:30%; background:#8b5e3c; border-radius:50%; position:absolute; }
+.ear.left{top:-15%; left:3%;}
+.ear.right{top:-15%; right:3%;}
+.eye{width:10%; height:10%; background:black; border-radius:50%; position:absolute; top:35%; }
+.eye.left{ left:30%; } .eye.right{ right:30%; }
+.snout{ width:50%; height:30%; background:#c49a6c; border-radius:50%; position:absolute; bottom:20%; left:25%; }
+.nose{ width:15%; height:10%; background:black; border-radius:50%; position:absolute; top:45%; left:42.5%; }
+.body{ width:73%; height:50%; background:#8b5e3c; border-radius:50%; position:absolute; bottom:0; left:13.5%; }
+.arm{ width:30%; height:40%; background:#8b5e3c; border-radius:50%; position:absolute; top:40%; z-index:3; }
+.arm.left{ left:-5%; transform:rotate(30deg); } .arm.right{ right:-5%; transform:rotate(-30deg); }
+.leg{ width:25%; height:25%; background:#8b5e3c; border-radius:50%; position:absolute; bottom:0; z-index:2; }
+.leg.left{ left:15%; } .leg.right{ right:15%; }
+.heart{ position:absolute; width:35%; height:35%; background:#ff1e4d; transform:rotate(-45deg); top:55%; left:50%; margin-left:-17.5%; border-radius:50%; z-index:4; animation:beat 1s infinite; }
+@keyframes beat{0%{transform:rotate(-45deg) scale(1);}50%{transform:rotate(-45deg) scale(1.2);}100%{transform:rotate(-45deg) scale(1);}}
+.message{ position:absolute; top:45%; left:50%; transform:translateX(-50%) scale(0); font-size:6vw; color:white; font-weight:bold; text-align:center; z-index:5; animation:popOut 2s ease forwards 1.5s; }
+@keyframes popOut{0%{transform:translateX(-50%) scale(0);}60%{transform:translateX(-50%) scale(1.2);}100%{transform:translateX(-50%) scale(1);}}
+.buttons{ margin-top:60%; display:flex; gap:15px;}
+button{ padding:12px 25px; border:none; border-radius:15px; font-weight:bold; cursor:pointer; font-size:16px; transition:0.3s;}
+#yes{ background:#ff4d6d; color:white; } #no{ background:#ccc; color:#333;}
+#yes:hover{ background:#e60039; } #no:hover{ background:#aaa;}
+</style>
+</head>
+<body>
+
+<div class="bear">
+  <div class="ear left"></div>
+  <div class="ear right"></div>
+  <div class="head">
+    <div class="eye left"></div>
+    <div class="eye right"></div>
+    <div class="snout"></div>
+    <div class="nose"></div>
+  </div>
+  <div class="body"></div>
+  <div class="arm left"></div>
+  <div class="arm right"></div>
+  <div class="leg left"></div>
+  <div class="leg right"></div>
+  <div class="heart"></div>
+  <div class="message" id="valentineName">...</div>
+</div>
+
+<div class="buttons">
+  <button id="yes">Oui 💖</button>
+  <button id="no">Non 😢</button>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const name = params.get("username");
+const message = document.getElementById("valentineName");
+message.innerHTML = name ? name + " 💌<br>Veux-tu être ma Valentine ?" : "Veux-tu être ma Valentine ? 💌";
+
+let noCount=0;
+const yesBtn=document.getElementById("yes");
+const noBtn=document.getElementById("no");
+
+noBtn.addEventListener("click", ()=>{
+  noCount++;
+  yesBtn.style.transform = `scale(${1+0.05*noCount}) translate(${Math.random()*20-10}px,${Math.random()*20-10}px)`;
+  if(noCount>=10){
+    window.location.href="non.html";
+  }
+});
+
+yesBtn.addEventListener("click", ()=>{
+  window.location.href="oui.html";
+});
+</script>
+</body>
+</html>
