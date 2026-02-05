@@ -5,14 +5,490 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>😢 Oh non...</title>
 <style>
-body{margin:0;height:100vh;background:#ffccd5;display:flex;justify-content:center;align-items:center;flex-direction:column;font-family:'Segoe UI', sans-serif;overflow:hidden;}
-h1{color:#333;font-size:2.5rem;text-align:center;margin-bottom:30px;}
-button{padding:15px 30px;border:none;border-radius:15px;font-weight:bold;background:#ff4d6d;color:white;font-size:18px;cursor:pointer;transition:0.3s;}
-button:hover{background:#e60039;}
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 50%, #f1b0b7 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  position: relative;
+}
+
+.container {
+  text-align: center;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 50px 70px;
+  border-radius: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  max-width: 80%;
+  animation: fadeIn 1.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: linear-gradient(90deg, #ff4d6d, #ff8fab);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  color: #444;
+  font-size: 3.2rem;
+  text-align: center;
+  margin-bottom: 40px;
+  line-height: 1.3;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+  padding-bottom: 20px;
+}
+
+h1:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff4d6d, transparent);
+}
+
+.sad-face {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  animation: sadBounce 2s ease-in-out infinite;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+@keyframes sadBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.1); }
+}
+
+.message {
+  color: #666;
+  font-size: 1.4rem;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  max-width: 600px;
+  font-weight: 300;
+}
+
+.buttons {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 18px 40px;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+  min-width: 200px;
+}
+
+button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: 0.5s;
+}
+
+button:hover:before {
+  left: 100%;
+}
+
+#yes-btn {
+  background: linear-gradient(135deg, #ff4d6d, #ff1e4d);
+  color: white;
+}
+
+#yes-btn:hover {
+  background: linear-gradient(135deg, #ff1e4d, #e60039);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(255, 30, 77, 0.3);
+}
+
+#no-btn {
+  background: linear-gradient(135deg, #6c757d, #495057);
+  color: white;
+}
+
+#no-btn:hover {
+  background: linear-gradient(135deg, #495057, #343a40);
+  transform: translateY(-5px);
+}
+
+/* Larmes qui tombent */
+.tear {
+  position: absolute;
+  width: 8px;
+  height: 15px;
+  background: #a8d0e6;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0;
+  animation: tearFall 3s linear infinite;
+  z-index: 1;
+}
+
+@keyframes tearFall {
+  0% {
+    transform: translateY(-100px) scale(0.5);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Cœurs brisés */
+.broken-heart {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0;
+  z-index: 1;
+  animation: breakHeart 4s linear infinite;
+}
+
+@keyframes breakHeart {
+  0% {
+    transform: translateY(-100px) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.rain-cloud {
+  position: absolute;
+  top: -50px;
+  width: 150px;
+  height: 60px;
+  background: #b0bec5;
+  border-radius: 50%;
+  opacity: 0.3;
+  z-index: 1;
+}
+
+.rain-cloud:before, .rain-cloud:after {
+  content: '';
+  position: absolute;
+  background: #b0bec5;
+  border-radius: 50%;
+}
+
+.rain-cloud:before {
+  width: 80px;
+  height: 80px;
+  top: -40px;
+  left: 20px;
+}
+
+.rain-cloud:after {
+  width: 60px;
+  height: 60px;
+  top: -30px;
+  right: 20px;
+}
+
+/* Fond avec effet de pluie triste */
+.rain-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Cœurs qui s'estompent */
+.fading-heart {
+  position: absolute;
+  font-size: 40px;
+  opacity: 0;
+  animation: fadeHeart 6s linear infinite;
+}
+
+@keyframes fadeHeart {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+.counter-message {
+  margin-top: 30px;
+  color: #888;
+  font-size: 1rem;
+  font-style: italic;
+}
 </style>
 </head>
 <body>
-<h1>Tu veux me blesser c'est ça ? 😢</h1>
-<button onclick="window.location.href='oui.html'">Non 😢 → Oui 💖</button>
+
+<div class="rain-background" id="rainBackground"></div>
+
+<div class="container">
+  <div class="sad-face">😢</div>
+  <h1>Tu veux me briser le cœur comme ça ?</h1>
+  
+  <div class="message">
+    C'était pourtant un "oui" qui aurait rendu cette journée magique...<br>
+    Mais peut-être que tu veux reconsidérer ta décision ?
+  </div>
+  
+  <div class="buttons">
+    <button id="yes-btn">Je change d'avis ! 💖</button>
+    <button id="no-btn" onclick="moveButton()">Je suis sûr(e)... 😔</button>
+  </div>
+  
+  <div class="counter-message" id="counter">Tu as cliqué "Non" 0 fois... mon cœur se brise un peu plus à chaque fois</div>
+</div>
+
+<script>
+// Créer des larmes qui tombent
+const rainBackground = document.getElementById('rainBackground');
+for(let i = 0; i < 20; i++) {
+  const tear = document.createElement('div');
+  tear.className = 'tear';
+  tear.style.left = Math.random() * 100 + '%';
+  tear.style.animationDelay = Math.random() * 3 + 's';
+  tear.style.width = Math.random() * 5 + 3 + 'px';
+  tear.style.height = Math.random() * 10 + 10 + 'px';
+  rainBackground.appendChild(tear);
+}
+
+// Créer des cœurs brisés
+for(let i = 0; i < 10; i++) {
+  const heart = document.createElement('div');
+  heart.className = 'broken-heart';
+  heart.innerHTML = '💔';
+  heart.style.left = Math.random() * 100 + '%';
+  heart.style.animationDelay = Math.random() * 4 + 's';
+  heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+  heart.style.color = '#ff4d6d';
+  rainBackground.appendChild(heart);
+}
+
+// Cœurs qui s'estompent
+for(let i = 0; i < 15; i++) {
+  const heart = document.createElement('div');
+  heart.className = 'fading-heart';
+  heart.innerHTML = '💔';
+  heart.style.left = Math.random() * 100 + '%';
+  heart.style.top = Math.random() * 100 + '%';
+  heart.style.animationDelay = Math.random() * 6 + 's';
+  heart.style.color = '#ff8fab';
+  rainBackground.appendChild(heart);
+}
+
+// Nuages de pluie
+for(let i = 0; i < 5; i++) {
+  const cloud = document.createElement('div');
+  cloud.className = 'rain-cloud';
+  cloud.style.left = Math.random() * 100 + '%';
+  cloud.style.opacity = Math.random() * 0.2 + 0.1;
+  cloud.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+  rainBackground.appendChild(cloud);
+}
+
+// Bouton "Oui"
+document.getElementById('yes-btn').addEventListener('click', function() {
+  this.innerHTML = "Hourra ! Retour au bonheur 💖";
+  this.style.background = "linear-gradient(135deg, #00cc66, #00b359)";
+  this.style.transform = "scale(1.1)";
+  
+  // Ajouter des cœurs joyeux
+  for(let i = 0; i < 20; i++) {
+    const heart = document.createElement('div');
+    heart.innerHTML = '💖';
+    heart.style.position = 'absolute';
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.top = Math.random() * 100 + '%';
+    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+    heart.style.opacity = '0.7';
+    heart.style.animation = 'fadeOut 2s forwards';
+    document.body.appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 2000);
+  }
+  
+  setTimeout(() => {
+    window.location.href = 'oui.html';
+  }, 1500);
+});
+
+// Compteur de clics sur "Non"
+let noCount = 0;
+const counterElement = document.getElementById('counter');
+const messages = [
+  "Tu as cliqué 'Non' 0 fois... mon cœur se brise un peu plus à chaque fois",
+  "1 refus... la déception commence",
+  "2 refus... ça fait mal",
+  "3 refus... pourquoi tant de cruauté ?",
+  "4 refus... chaque clic est une petite mort",
+  "5 refus... mon cœur est en mille morceaux",
+  "6 refus... je commence à perdre espoir",
+  "7 refus... la tristesse m'envahit",
+  "8 refus... plus que de la douleur maintenant",
+  "9 refus... je vais finir en larmes",
+  "10 refus... c'est trop, je suis brisé(e)"
+];
+
+function moveButton() {
+  noCount++;
+  const noBtn = document.getElementById('no-btn');
+  
+  // Mettre à jour le message
+  if (noCount < messages.length) {
+    counterElement.textContent = messages[noCount];
+  } else {
+    counterElement.textContent = `${noCount} refus... arrête s'il te plaît 😭`;
+  }
+  
+  // Déplacer le bouton aléatoirement
+  const maxX = window.innerWidth - noBtn.offsetWidth;
+  const maxY = window.innerHeight - noBtn.offsetHeight;
+  
+  const randomX = Math.random() * maxX;
+  const randomY = Math.random() * maxY;
+  
+  noBtn.style.position = 'fixed';
+  noBtn.style.left = randomX + 'px';
+  noBtn.style.top = randomY + 'px';
+  
+  // Changement de texte progressif
+  const sadTexts = [
+    "Je suis sûr(e)... 😔",
+    "Vraiment ? 😟",
+    "Sans hésitation ? 😥",
+    "C'est ton dernier mot ? 😭",
+    "Tu ne regrettes pas ? 💔",
+    "Pitié... 🥺",
+    "Arrête ça 😢",
+    "Tu es cruel(le) 😭",
+    "Mon cœur saigne 💔",
+    "Je meurs à petit feu 💀"
+  ];
+  
+  if (noCount < sadTexts.length) {
+    noBtn.innerHTML = sadTexts[noCount];
+  }
+  
+  // Ajouter une larme supplémentaire
+  const tear = document.createElement('div');
+  tear.className = 'tear';
+  tear.style.left = Math.random() * 100 + '%';
+  tear.style.animationDelay = '0s';
+  tear.style.width = '8px';
+  tear.style.height = '15px';
+  rainBackground.appendChild(tear);
+  
+  // Si trop de clics, forcer le "oui"
+  if (noCount >= 15) {
+    alert("D'accord, d'accord ! Je vais considérer que c'est un OUI ! 💖");
+    window.location.href = 'oui.html';
+  }
+}
+
+// Animation de larmes au survol du titre
+document.querySelector('h1').addEventListener('mouseover', function() {
+  for(let i = 0; i < 3; i++) {
+    const tear = document.createElement('div');
+    tear.className = 'tear';
+    tear.style.left = (50 + Math.random() * 20 - 10) + '%';
+    tear.style.animationDelay = '0s';
+    tear.style.width = '6px';
+    tear.style.height = '12px';
+    rainBackground.appendChild(tear);
+  }
+});
+
+// Effet sonore triste (optionnel)
+function playSadSound() {
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(392, audioContext.currentTime); // Sol
+    oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // Fa
+    oscillator.frequency.setValueAtTime(329.63, audioContext.currentTime + 0.2); // Mi
+    
+    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
+  } catch (e) {
+    // Audio non supporté
+  }
+}
+
+// Jouer un son triste au chargement
+setTimeout(playSadSound, 1000);
+
+// Ajouter une animation CSS pour fadeOut
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeOut {
+    from { opacity: 0.7; transform: scale(1); }
+    to { opacity: 0; transform: scale(1.5); }
+  }
+`;
+document.head.appendChild(style);
+</script>
+
 </body>
 </html>
