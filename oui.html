@@ -75,17 +75,93 @@ h1 {
   to { opacity: 0.9; transform: translateY(0); }
 }
 
+/* Conteneur pour les messages avec transition */
+.message-container {
+  position: relative;
+  height: 150px;
+  margin: clamp(20px, 4vw, 30px) auto;
+  max-width: 600px;
+  overflow: hidden;
+}
+
 .message {
   color: white;
   font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-  margin-top: clamp(20px, 4vw, 30px);
   padding: clamp(15px, 3vw, 20px);
   background: rgba(255, 255, 255, 0.1);
   border-radius: clamp(15px, 3vw, 20px);
-  max-width: 600px;
   line-height: 1.6;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.message.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Contrôles de navigation */
+.nav-controls {
+  margin: 25px auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  max-width: 400px;
+}
+
+.nav-btn {
+  padding: 12px 25px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 140px;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Indicateur de message */
+.message-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px auto;
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.indicator-dot.active {
+  background: white;
+  transform: scale(1.3);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .heart-burst {
@@ -218,10 +294,25 @@ h1 {
     margin-top: 10px;
   }
   
+  .message-container {
+    height: 130px;
+    margin: 20px auto;
+  }
+  
   .message {
     font-size: 1rem;
     padding: 15px;
-    margin-top: 20px;
+  }
+  
+  .nav-controls {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .nav-btn {
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto;
   }
   
   .return-button {
@@ -254,10 +345,18 @@ h1 {
     margin-top: 10px;
   }
   
+  .message-container {
+    height: 100px;
+    margin: 15px auto;
+  }
+  
   .message {
     font-size: 1rem;
-    margin-top: 15px;
     padding: 15px;
+  }
+  
+  .nav-controls {
+    margin: 15px auto;
   }
   
   .return-button {
@@ -296,6 +395,11 @@ h1 {
     transform: translateY(-5px) scale(1.02);
     transition: transform 0.3s ease;
   }
+  
+  .nav-btn {
+    min-width: 160px;
+    padding: 15px 30px;
+  }
 }
 
 /* Support du thème sombre */
@@ -312,6 +416,10 @@ h1 {
   .message {
     background: rgba(0, 0, 0, 0.2);
   }
+  
+  .nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+  }
 }
 
 /* Optimisation des animations pour mobile */
@@ -325,8 +433,13 @@ h1 {
     animation: none;
   }
   
-  .return-button:hover {
+  .return-button:hover,
+  .nav-btn:hover {
     transform: none;
+  }
+  
+  .message {
+    transition: none;
   }
 }
 
@@ -347,6 +460,12 @@ h1 {
   .message {
     font-size: 0.95rem;
     padding: 12px;
+  }
+  
+  .nav-btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    min-width: 120px;
   }
 }
 
@@ -370,7 +489,7 @@ html, body {
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: 1s;
+  transition: 0.5s;
 }
 
 .return-button:hover:before {
@@ -393,9 +512,20 @@ html, body {
   }
 }
 
-/* Animation de transition pour les messages */
-.message-transition {
-  transition: opacity 1s ease-in-out;
+/* Effet de brillance sur les boutons de navigation */
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+}
+
+.nav-btn:hover::after {
+  left: 100%;
 }
 </style>
 </head>
@@ -404,11 +534,62 @@ html, body {
 <div class="container">
   <h1>💖 Elle a dit OUI ! 💖</h1>
   <div class="subtitle">Le plus beau "oui" du monde !</div>
-  <div class="message" id="message">
-    Une histoire d'amour commence aujourd'hui...<br>
-    Que chaque jour soit rempli de rires, de câlins<br>
-    et de moments magiques ensemble !
+  
+  <!-- Conteneur pour les messages avec transition -->
+  <div class="message-container">
+    <div class="message active" id="message1">
+      Une histoire d'amour commence aujourd'hui...<br>
+      Que chaque jour soit rempli de rires, de câlins<br>
+      et de moments magiques ensemble !
+    </div>
+    
+    <div class="message" id="message2">
+      Votre histoire d'amour vient de commencer !<br>
+      Que chaque instant soit une nouvelle page<br>
+      dans le plus beau livre jamais écrit 💖
+    </div>
+    
+    <div class="message" id="message3">
+      Félicitations pour ce magnifique début !<br>
+      L'aventure la plus belle est celle qui commence<br>
+      avec un "oui" plein d'amour ✨
+    </div>
+    
+    <div class="message" id="message4">
+      Que la magie de l'amour vous accompagne toujours<br>
+      À travers tous les moments, grands et petits<br>
+      Votre histoire sera unique et merveilleuse 🌟
+    </div>
+    
+    <div class="message" id="message5">
+      Soyez heureux à jamais !<br>
+      Que votre amour grandisse chaque jour<br>
+      Comme une fleur éternellement en fleur 🌹
+    </div>
   </div>
+  
+  <!-- Indicateur de message -->
+  <div class="message-indicator" id="messageIndicator">
+    <div class="indicator-dot active" data-index="0"></div>
+    <div class="indicator-dot" data-index="1"></div>
+    <div class="indicator-dot" data-index="2"></div>
+    <div class="indicator-dot" data-index="3"></div>
+    <div class="indicator-dot" data-index="4"></div>
+  </div>
+  
+  <!-- Boutons de navigation -->
+  <div class="nav-controls">
+    <button class="nav-btn" onclick="previousMessage()">
+      ◀ Précédent
+    </button>
+    <button class="nav-btn" onclick="nextMessage()">
+      Suivant ▶
+    </button>
+  </div>
+  
+  <button class="return-button" onclick="window.location.href='index.html'">
+    ← Retour à la carte
+  </button>
 </div>
 
 <div class="floating-hearts" id="floatingHearts"></div>
@@ -418,6 +599,10 @@ html, body {
 const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 const isLowPerformance = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Variables pour gérer les messages
+let currentMessageIndex = 0;
+const totalMessages = 5;
+
 // Fonction pour générer des couleurs aléatoires pastel
 function getRandomColor() {
   const colors = [
@@ -426,6 +611,81 @@ function getRandomColor() {
     "#ff97b7", "#ffacc5", "#ffcad4"
   ];
   return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Passer au message suivant
+function nextMessage() {
+  const nextIndex = (currentMessageIndex + 1) % totalMessages;
+  showMessage(nextIndex);
+  
+  // Effet sonore doux
+  playNavSound();
+}
+
+// Revenir au message précédent
+function previousMessage() {
+  const prevIndex = currentMessageIndex === 0 ? totalMessages - 1 : currentMessageIndex - 1;
+  showMessage(prevIndex);
+  
+  // Effet sonore doux
+  playNavSound();
+}
+
+// Afficher un message spécifique
+function showMessage(index) {
+  if (index < 0 || index >= totalMessages) return;
+  
+  // Retirer la classe active de tous les messages
+  for (let i = 1; i <= totalMessages; i++) {
+    const message = document.getElementById(`message${i}`);
+    message.classList.remove('active');
+  }
+  
+  // Mettre à jour l'indicateur
+  updateIndicator(currentMessageIndex, false);
+  
+  // Activer le nouveau message
+  currentMessageIndex = index;
+  const newMessage = document.getElementById(`message${index + 1}`);
+  newMessage.classList.add('active');
+  
+  // Mettre à jour l'indicateur
+  updateIndicator(index, true);
+}
+
+// Mettre à jour les indicateurs
+function updateIndicator(index, isActive) {
+  const dots = document.querySelectorAll('.indicator-dot');
+  dots.forEach(dot => dot.classList.remove('active'));
+  
+  if (isActive && dots[index]) {
+    dots[index].classList.add('active');
+  }
+}
+
+// Effet sonore de navigation
+function playNavSound() {
+  if (isMobile) return; // Éviter les sons automatiques sur mobile
+  
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime + 0.05);
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.1);
+  } catch (e) {
+    // Audio non supporté
+  }
 }
 
 // Adapte le nombre d'éléments selon le device
@@ -522,33 +782,8 @@ if (!isMobile) {
   setTimeout(playCelebrationSound, 500);
 }
 
-// Message de félicitations qui change toutes les 3 secondes
-const messages = [
-  "Notre histoire d'amour vient de commencer !",
-  "Que la magie de l'amour nous accompagne toujours",
-  "Merci pour ce magnifique début !",
-  "L'aventure la plus belle est celle qui commence",
-  "J'espère te rendre hereuse à jamais !"
-];
-
-const messageElement = document.getElementById('message');
-let messageIndex = 0;
-
-if (!isLowPerformance) {
-  setInterval(() => {
-    messageIndex = (messageIndex + 1) % messages.length;
-    messageElement.style.opacity = 0;
-    setTimeout(() => {
-      messageElement.innerHTML = messages[messageIndex] + "<br>💖💖💖";
-      messageElement.style.opacity = 1;
-      messageElement.classList.add('message-transition');
-    }, 500);
-  }, 3000);
-}
-
 // Gestion du redimensionnement
 function handleResize() {
-  // Réajuster les positions si nécessaire
   const hearts = document.querySelectorAll('.heart-burst');
   hearts.forEach(heart => {
     heart.style.left = window.innerWidth/2 + "px";
@@ -567,25 +802,24 @@ window.addEventListener('resize', () => {
 window.addEventListener('orientationchange', function() {
   setTimeout(() => {
     handleResize();
-    // Recalculer la taille des éléments si nécessaire
     const container = document.querySelector('.container');
     container.style.animation = 'none';
     setTimeout(() => {
-      container.style.animation = 'float 7s ease-in-out infinite';
+      container.style.animation = 'float 3s ease-in-out infinite';
     }, 10);
   }, 100);
 });
 
 // Touch-friendly pour mobile
 if (isMobile) {
-  // Augmenter la zone cliquable des boutons
-  const button = document.querySelector('.return-button');
-  button.style.minHeight = '44px';
-  button.style.display = 'flex';
-  button.style.alignItems = 'center';
-  button.style.justifyContent = 'center';
+  const buttons = document.querySelectorAll('.nav-btn, .return-button');
+  buttons.forEach(button => {
+    button.style.minHeight = '44px';
+    button.style.display = 'flex';
+    button.style.alignItems = 'center';
+    button.style.justifyContent = 'center';
+  });
   
-  // Désactiver certaines animations gourmandes
   const floatingHearts = document.querySelectorAll('.floating-heart');
   floatingHearts.forEach((heart, index) => {
     if (index > 6) {
@@ -604,12 +838,19 @@ document.addEventListener('DOMContentLoaded', () => {
     container.style.transition = 'opacity 1s, transform 1s';
     container.style.opacity = '1';
     container.style.transform = 'scale(1)';
+    
+    // Ajouter les événements aux indicateurs
+    const indicators = document.querySelectorAll('.indicator-dot');
+    indicators.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showMessage(index);
+      });
+    });
   }, 300);
 });
 
 // Optimisation pour les appareils à faible puissance
 if (window.matchMedia('(max-width: 768px)').matches) {
-  // Réduire les effets sur mobile
   document.querySelectorAll('.sparkle').forEach(sparkle => {
     if (Math.random() > 0.5) {
       sparkle.style.display = 'none';
@@ -617,16 +858,14 @@ if (window.matchMedia('(max-width: 768px)').matches) {
   });
 }
 
-// Ajouter une animation CSS pour le fadeOut
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes fadeOut {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(1.5); }
+// Navigation au clavier
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowLeft') {
+    previousMessage();
+  } else if (e.key === 'ArrowRight') {
+    nextMessage();
   }
-`;
-document.head.appendChild(style);
+});
 </script>
-
 </body>
 </html>
