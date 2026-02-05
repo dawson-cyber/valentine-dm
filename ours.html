@@ -15,83 +15,434 @@ body{
   background:radial-gradient(circle at top,#ffd6e0,#ff8fab);
   font-family:'Segoe UI', sans-serif;
   overflow:hidden;
+  position:relative;
+}
+
+/* Pluie de cœurs */
+.hearts-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heart-rain {
+  position: absolute;
+  color: #ff1e4d;
+  font-size: 20px;
+  opacity: 0;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(100vh + 50px)) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Ours - VERSION CORRIGÉE */
+.bear-container {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: -50px;
 }
 
 .bear{
   position:relative;
-  width:300px;
-  max-width:80vw;
-  height:400px;
+  width:280px;
+  height:320px;
+  margin-bottom: 20px;
 }
 
-.head{ width:80%; height:50%; background:#8b5e3c; border-radius:50%; position:absolute; top:0; left:10%; }
-.ear{ width:30%; height:30%; background:#8b5e3c; border-radius:50%; position:absolute; }
-.ear.left{top:-15%; left:3%;}
-.ear.right{top:-15%; right:3%;}
-.eye{width:10%; height:10%; background:black; border-radius:50%; position:absolute; top:35%; }
-.eye.left{ left:30%; } .eye.right{ right:30%; }
-.snout{ width:50%; height:30%; background:#c49a6c; border-radius:50%; position:absolute; bottom:20%; left:25%; }
-.nose{ width:15%; height:10%; background:black; border-radius:50%; position:absolute; top:45%; left:42.5%; }
-.body{ width:73%; height:50%; background:#8b5e3c; border-radius:50%; position:absolute; bottom:0; left:13.5%; }
-.arm{ width:30%; height:40%; background:#8b5e3c; border-radius:50%; position:absolute; top:40%; z-index:3; }
-.arm.left{ left:-5%; transform:rotate(30deg); } .arm.right{ right:-5%; transform:rotate(-30deg); }
-.leg{ width:25%; height:25%; background:#8b5e3c; border-radius:50%; position:absolute; bottom:0; z-index:2; }
-.leg.left{ left:15%; } .leg.right{ right:15%; }
-.heart{ position:absolute; width:35%; height:35%; background:#ff1e4d; transform:rotate(-45deg); top:55%; left:50%; margin-left:-17.5%; border-radius:50%; z-index:4; animation:beat 1s infinite; }
-@keyframes beat{0%{transform:rotate(-45deg) scale(1);}50%{transform:rotate(-45deg) scale(1.2);}100%{transform:rotate(-45deg) scale(1);}}
-.message{ position:absolute; top:45%; left:50%; transform:translateX(-50%) scale(0); font-size:6vw; color:white; font-weight:bold; text-align:center; z-index:5; animation:popOut 2s ease forwards 1.5s; }
-@keyframes popOut{0%{transform:translateX(-50%) scale(0);}60%{transform:translateX(-50%) scale(1.2);}100%{transform:translateX(-50%) scale(1);}}
-.buttons{ margin-top:60%; display:flex; gap:15px;}
-button{ padding:12px 25px; border:none; border-radius:15px; font-weight:bold; cursor:pointer; font-size:16px; transition:0.3s;}
-#yes{ background:#ff4d6d; color:white; } #no{ background:#ccc; color:#333;}
-#yes:hover{ background:#e60039; } #no:hover{ background:#aaa;}
+/* Tête centrée */
+.head{ 
+  width:150px; 
+  height:140px; 
+  background:#8b5e3c; 
+  border-radius:50%; 
+  position:absolute; 
+  top:10px;
+  left:50%; 
+  transform: translateX(-50%);
+  box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
+  z-index: 3;
+}
+
+/* Oreilles */
+.ear{ 
+  width:60px; 
+  height:60px; 
+  background:#8b5e3c; 
+  border-radius:50%; 
+  position:absolute; 
+  top:0;
+  z-index: 2;
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+}
+.ear.left{
+  left:calc(50% - 75px);
+}
+.ear.right{
+  right:calc(50% - 75px);
+}
+
+/* Yeux */
+.eye{
+  width:20px; 
+  height:20px; 
+  background:black; 
+  border-radius:50%; 
+  position:absolute; 
+  top:45px;
+}
+.eye.left{ left:40px; } 
+.eye.right{ right:40px; }
+
+/* Museau - AGRANDI pour mieux voir le nez */
+.snout{ 
+  width:85px; 
+  height:60px; 
+  background:#c49a6c; 
+  border-radius:50%; 
+  position:absolute; 
+  bottom:20px; /* Remonté un peu */
+  left:50%;
+  transform: translateX(-50%);
+  box-shadow: inset 0 -3px 5px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* NEZ CORRIGÉ - positionné au centre du museau */
+.nose{ 
+  width:25px; 
+  height:15px; 
+  background:black; 
+  border-radius:50%; 
+  position:absolute;
+  top: 35px; /* Position baissée - au centre du museau */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Corps */
+.body{ 
+  width:160px; 
+  height:160px; 
+  background:#8b5e3c; 
+  border-radius:50%; 
+  position:absolute; 
+  top:100px;
+  left:50%;
+  transform: translateX(-50%);
+  box-shadow: inset 0 -5px 10px rgba(0,0,0,0.1);
+  z-index: 1;
+}
+
+/* Bras */
+.arm{ 
+  width:50px; 
+  height:100px; 
+  background:#8b5e3c; 
+  border-radius:50%; 
+  position:absolute; 
+  top:90px;
+  z-index: 0;
+}
+.arm.left{ 
+  left:calc(50% - 110px);
+  transform:rotate(30deg); 
+} 
+.arm.right{ 
+  right:calc(50% - 110px);
+  transform:rotate(-30deg); 
+}
+
+/* Pattes */
+.leg{ 
+  width:45px; 
+  height:70px; 
+  background:#8b5e3c; 
+  border-radius:50%; 
+  position:absolute; 
+  top:220px;
+}
+.leg.left{ left:calc(50% - 60px); } 
+.leg.right{ right:calc(50% - 60px); }
+
+/* Cœur entre les mains */
+.heart-hold{ 
+  position:absolute; 
+  width:100px; 
+  height:100px; 
+  top:110px; 
+  left:50%;
+  transform: translateX(-50%);
+  z-index: 4; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.heart{ 
+  width:60px; 
+  height:60px; 
+  background:#ff1e4d; 
+  transform:rotate(-45deg); 
+  border-radius:10px;
+  animation:beat 1s infinite;
+  box-shadow: 0 5px 15px rgba(255,30,77,0.4);
+}
+@keyframes beat{
+  0%{transform:rotate(-45deg) scale(1);}
+  50%{transform:rotate(-45deg) scale(1.2);}
+  100%{transform:rotate(-45deg) scale(1);}
+}
+
+.heart:before,
+.heart:after {
+  content:"";
+  width:60px;
+  height:60px;
+  background:#ff1e4d;
+  border-radius:50%;
+  position:absolute;
+}
+
+.heart:before{
+  top:-30px;
+  left:0;
+}
+
+.heart:after{
+  top:0;
+  left:30px;
+}
+
+/* Message */
+.message{ 
+  position:absolute; 
+  top:320px;
+  left:50%; 
+  transform:translateX(-50%) scale(0); 
+  font-size:22px; 
+  color:white; 
+  font-weight:bold; 
+  text-align:center; 
+  z-index:5; 
+  background: rgba(255, 77, 109, 0.9);
+  padding: 15px 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  width: 80%;
+  max-width: 300px;
+  animation:popOut 2s ease forwards 1.5s; 
+}
+
+@keyframes popOut{
+  0%{transform:translateX(-50%) scale(0);}
+  60%{transform:translateX(-50%) scale(1.2);}
+  100%{transform:translateX(-50%) scale(1);}
+}
+
+/* Boutons */
+.buttons{ 
+  margin-top: 100px;
+  display:flex; 
+  gap:20px;
+  z-index: 10;
+  position: relative;
+}
+
+button{ 
+  padding:15px 30px; 
+  border:none; 
+  border-radius:20px; 
+  font-weight:bold; 
+  cursor:pointer; 
+  font-size:18px; 
+  transition:0.3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+#yes{ 
+  background:linear-gradient(135deg, #ff4d6d, #ff1e4d); 
+  color:white; 
+} 
+#no{ 
+  background:linear-gradient(135deg, #ccc, #aaa); 
+  color:#333;
+}
+
+#yes:hover{ 
+  background:linear-gradient(135deg, #e60039, #cc0033); 
+  transform: translateY(-3px);
+} 
+#no:hover{ 
+  background:linear-gradient(135deg, #aaa, #888);
+  transform: translateY(-3px);
+}
 </style>
 </head>
 <body>
 
-<div class="bear">
-  <div class="ear left"></div>
-  <div class="ear right"></div>
-  <div class="head">
-    <div class="eye left"></div>
-    <div class="eye right"></div>
-    <div class="snout"></div>
-    <div class="nose"></div>
-  </div>
-  <div class="body"></div>
-  <div class="arm left"></div>
-  <div class="arm right"></div>
-  <div class="leg left"></div>
-  <div class="leg right"></div>
-  <div class="heart"></div>
-  <div class="message" id="valentineName">...</div>
-</div>
+<div class="hearts-rain" id="heartsRain"></div>
 
-<div class="buttons">
-  <button id="yes">Oui 💖</button>
-  <button id="no">Non 😢</button>
+<div class="bear-container">
+  <div class="bear">
+    <!-- Oreilles -->
+    <div class="ear left"></div>
+    <div class="ear right"></div>
+    
+    <!-- Tête -->
+    <div class="head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="snout">
+        <!-- Le nez est maintenant DANS le museau -->
+        <div class="nose"></div>
+      </div>
+    </div>
+    
+    <!-- Corps -->
+    <div class="body"></div>
+    
+    <!-- Bras -->
+    <div class="arm left"></div>
+    <div class="arm right"></div>
+    
+    <!-- Pattes -->
+    <div class="leg left"></div>
+    <div class="leg right"></div>
+    
+    <!-- Cœur -->
+    <div class="heart-hold">
+      <div class="heart"></div>
+    </div>
+    
+    <!-- Message -->
+    <div class="message" id="valentineName">...</div>
+  </div>
+
+  <div class="buttons">
+    <button id="yes">Oui 💖</button>
+    <button id="no">Non 😢</button>
+  </div>
 </div>
 
 <script>
+// Pluie de cœurs
+const heartsRain = document.getElementById('heartsRain');
+const numHearts = 50;
+
+for (let i = 0; i < numHearts; i++) {
+  const heart = document.createElement('div');
+  heart.classList.add('heart-rain');
+  heart.innerHTML = '💖';
+  
+  const left = Math.random() * 100;
+  const size = Math.random() * 20 + 10;
+  const duration = Math.random() * 5 + 5;
+  const delay = Math.random() * 5;
+  
+  heart.style.left = `${left}%`;
+  heart.style.fontSize = `${size}px`;
+  heart.style.animationDuration = `${duration}s`;
+  heart.style.animationDelay = `${delay}s`;
+  
+  heartsRain.appendChild(heart);
+}
+
+// Message de Saint-Valentin
 const params = new URLSearchParams(window.location.search);
 const name = params.get("username");
 const message = document.getElementById("valentineName");
-message.innerHTML = name ? name + " 💌<br>Veux-tu être ma Valentine ?" : "Veux-tu être ma Valentine ? 💌";
+message.innerHTML = name ? `${name} 💌<br>Veux-tu être ma Valentine ?` : "Veux-tu être ma Valentine ? 💌";
 
-let noCount=0;
-const yesBtn=document.getElementById("yes");
-const noBtn=document.getElementById("no");
+// Boutons interactifs
+let noCount = 0;
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
 
 noBtn.addEventListener("click", ()=>{
   noCount++;
   yesBtn.style.transform = `scale(${1+0.05*noCount}) translate(${Math.random()*20-10}px,${Math.random()*20-10}px)`;
-  if(noCount>=10){
+  
+  const noTexts = ["Non 😢", "Sûr ? 😔", "Vraiment ? 😥", "Réfléchis ! 🥺", "Dernière chance 😭", "Tu es sûr(e) ? 😟", "Je vais pleurer 😭", "Pourquoi ? 😭", "S'il te plaît 🥺", "OK... 😔"];
+  if (noCount < noTexts.length) {
+    noBtn.textContent = noTexts[noCount];
+  }
+  
+  if(noCount >= 15){
     window.location.href="non.html";
   }
 });
 
 yesBtn.addEventListener("click", ()=>{
-  window.location.href="oui.html";
+  // Effet de confirmation
+  yesBtn.style.transform = "scale(1.3)";
+  yesBtn.style.background = "linear-gradient(135deg, #00cc66, #00b359)";
+  yesBtn.innerHTML = "Hourra ! 🎉";
+  
+  // Pluie de cœurs supplémentaire
+  for (let i = 0; i < 30; i++) {
+    const heart = document.createElement('div');
+    heart.classList.add('heart-rain');
+    heart.innerHTML = '💖';
+    
+    const left = Math.random() * 100;
+    const size = Math.random() * 25 + 15;
+    
+    heart.style.left = `${left}%`;
+    heart.style.fontSize = `${size}px`;
+    heart.style.animationDuration = `${2}s`;
+    heart.style.color = "#ff1e4d";
+    heart.style.animationDelay = `${Math.random() * 2}s`;
+    
+    heartsRain.appendChild(heart);
+  }
+  
+  // Animation du message
+  const messageDiv = document.getElementById("valentineName");
+  messageDiv.style.background = "linear-gradient(135deg, #00cc66, #00b359)";
+  messageDiv.innerHTML = name ? `Génial ${name} ! 💖<br>Tu as rendu mon jour !` : "Génial ! 💖<br>Tu as rendu mon jour !";
+  
+  // Redirection
+  setTimeout(() => {
+    window.location.href = "oui.html";
+  }, 2500);
+});
+
+// Animation au chargement
+document.addEventListener('DOMContentLoaded', () => {
+  const bear = document.querySelector('.bear');
+  bear.style.opacity = '0';
+  bear.style.transform = 'translateY(20px)';
+  
+  setTimeout(() => {
+    bear.style.transition = 'opacity 1s, transform 1s';
+    bear.style.opacity = '1';
+    bear.style.transform = 'translateY(0)';
+  }, 500);
 });
 </script>
 </body>
