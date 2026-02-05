@@ -5,31 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>😢 Oh non...</title>
 <style>
-body {
+/* Reset et base responsive */
+* {
   margin: 0;
-  height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
   background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 50%, #f1b0b7 100%);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
   position: relative;
+  padding: 20px;
+}
+
+/* Fond avec effet de pluie triste */
+.rain-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .container {
   text-align: center;
   z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  padding: 50px 70px;
-  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: clamp(30px, 5vw, 50px) clamp(20px, 5vw, 70px);
+  border-radius: clamp(20px, 4vw, 30px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   border: 2px solid rgba(255, 255, 255, 0.5);
-  max-width: 80%;
+  width: min(95%, 800px);
   animation: fadeIn 1.5s ease-out;
   position: relative;
   overflow: hidden;
+  margin: 20px 0;
 }
 
 .container:before {
@@ -38,7 +57,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 8px;
+  height: clamp(6px, 1vw, 8px);
   background: linear-gradient(90deg, #ff4d6d, #ff8fab);
 }
 
@@ -47,32 +66,12 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-h1 {
-  color: #444;
-  font-size: 3.2rem;
-  text-align: center;
-  margin-bottom: 40px;
-  line-height: 1.3;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-  position: relative;
-  padding-bottom: 20px;
-}
-
-h1:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 25%;
-  width: 50%;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #ff4d6d, transparent);
-}
-
 .sad-face {
-  font-size: 5rem;
-  margin-bottom: 20px;
+  font-size: clamp(3.5rem, 10vw, 5rem);
+  margin-bottom: clamp(15px, 3vw, 20px);
   animation: sadBounce 2s ease-in-out infinite;
   text-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  display: inline-block;
 }
 
 @keyframes sadBounce {
@@ -80,34 +79,60 @@ h1:after {
   50% { transform: translateY(-10px) scale(1.1); }
 }
 
+h1 {
+  color: #444;
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  text-align: center;
+  margin-bottom: clamp(25px, 4vw, 40px);
+  line-height: 1.3;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+  padding-bottom: clamp(15px, 3vw, 20px);
+}
+
+h1:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ff4d6d, transparent);
+}
+
 .message {
   color: #666;
-  font-size: 1.4rem;
-  margin-bottom: 40px;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  margin-bottom: clamp(30px, 4vw, 40px);
   line-height: 1.6;
   max-width: 600px;
   font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .buttons {
   display: flex;
-  gap: 25px;
+  gap: clamp(15px, 3vw, 25px);
   flex-wrap: wrap;
   justify-content: center;
+  margin-bottom: clamp(20px, 3vw, 30px);
 }
 
 button {
-  padding: 18px 40px;
+  padding: clamp(14px, 2.5vw, 18px) clamp(25px, 4vw, 40px);
   border: none;
-  border-radius: 25px;
+  border-radius: clamp(20px, 4vw, 25px);
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2vw, 1.2rem);
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
   position: relative;
   overflow: hidden;
-  min-width: 200px;
+  min-width: min(200px, 90vw);
+  flex: 1;
+  max-width: 300px;
 }
 
 button:before {
@@ -146,11 +171,11 @@ button:hover:before {
   transform: translateY(-5px);
 }
 
-/* Larmes qui tombent */
+/* Larmes qui tombent - responsive */
 .tear {
   position: absolute;
-  width: 8px;
-  height: 15px;
+  width: clamp(4px, 1vw, 8px);
+  height: clamp(8px, 2vw, 15px);
   background: #a8d0e6;
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   opacity: 0;
@@ -175,10 +200,10 @@ button:hover:before {
   }
 }
 
-/* Cœurs brisés */
+/* Cœurs brisés - responsive */
 .broken-heart {
   position: absolute;
-  font-size: 30px;
+  font-size: clamp(20px, 4vw, 30px);
   opacity: 0;
   z-index: 1;
   animation: breakHeart 4s linear infinite;
@@ -198,11 +223,12 @@ button:hover:before {
   }
 }
 
+/* Nuages de pluie - responsive */
 .rain-cloud {
   position: absolute;
   top: -50px;
-  width: 150px;
-  height: 60px;
+  width: clamp(100px, 20vw, 150px);
+  height: clamp(40px, 8vw, 60px);
   background: #b0bec5;
   border-radius: 50%;
   opacity: 0.3;
@@ -217,34 +243,23 @@ button:hover:before {
 }
 
 .rain-cloud:before {
-  width: 80px;
-  height: 80px;
-  top: -40px;
-  left: 20px;
+  width: clamp(60px, 12vw, 80px);
+  height: clamp(60px, 12vw, 80px);
+  top: clamp(-30px, -6vw, -40px);
+  left: clamp(15px, 3vw, 20px);
 }
 
 .rain-cloud:after {
-  width: 60px;
-  height: 60px;
-  top: -30px;
-  right: 20px;
-}
-
-/* Fond avec effet de pluie triste */
-.rain-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+  width: clamp(40px, 8vw, 60px);
+  height: clamp(40px, 8vw, 60px);
+  top: clamp(-20px, -4vw, -30px);
+  right: clamp(15px, 3vw, 20px);
 }
 
 /* Cœurs qui s'estompent */
 .fading-heart {
   position: absolute;
-  font-size: 40px;
+  font-size: clamp(25px, 6vw, 40px);
   opacity: 0;
   animation: fadeHeart 6s linear infinite;
 }
@@ -265,10 +280,188 @@ button:hover:before {
 }
 
 .counter-message {
-  margin-top: 30px;
+  margin-top: clamp(20px, 3vw, 30px);
   color: #888;
-  font-size: 1rem;
+  font-size: clamp(0.85rem, 2vw, 1rem);
   font-style: italic;
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Responsive spécifique pour très petits écrans */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 20px;
+    border-radius: 20px;
+  }
+  
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  button {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  h1:after {
+    left: 5%;
+    width: 90%;
+  }
+  
+  .message {
+    font-size: 1.1rem;
+  }
+}
+
+/* Mode paysage sur mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  body {
+    padding: 10px;
+    min-height: auto;
+  }
+  
+  .container {
+    margin: 10px auto;
+    padding: 20px 30px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  
+  .sad-face {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+  
+  .message {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+  
+  .buttons {
+    margin-bottom: 15px;
+  }
+  
+  button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+}
+
+/* Pour tablettes */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container {
+    width: min(90%, 700px);
+    padding: 40px 50px;
+  }
+  
+  h1 {
+    font-size: 2.8rem;
+  }
+  
+  .message {
+    font-size: 1.3rem;
+  }
+  
+  button {
+    font-size: 1.3rem;
+    padding: 16px 35px;
+  }
+}
+
+/* Pour ordinateurs */
+@media (min-width: 1025px) {
+  .container {
+    width: min(80%, 900px);
+  }
+  
+  .container:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Support du thème sombre */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background: rgba(40, 40, 40, 0.95);
+    color: #f0f0f0;
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  h1 {
+    color: #f0f0f0;
+  }
+  
+  .message {
+    color: #ccc;
+  }
+  
+  .counter-message {
+    color: #aaa;
+  }
+  
+  #no-btn {
+    background: linear-gradient(135deg, #555, #333);
+  }
+  
+  #no-btn:hover {
+    background: linear-gradient(135deg, #444, #222);
+  }
+}
+
+/* Animation pour le fadeOut */
+@keyframes fadeOut {
+  from { opacity: 0.7; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.5); }
+}
+
+/* Pour éviter les débordements horizontaux */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Optimisation des animations pour mobile */
+@media (prefers-reduced-motion: reduce) {
+  .sad-face,
+  .tear,
+  .broken-heart,
+  .fading-heart {
+    animation: none;
+  }
+  
+  button:hover {
+    transform: none;
+  }
+}
+
+/* Correction pour les écrans très étroits */
+@media (max-width: 350px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  .message {
+    font-size: 1rem;
+  }
+  
+  button {
+    font-size: 0.95rem;
+    padding: 12px 20px;
+  }
 }
 </style>
 </head>
@@ -287,56 +480,83 @@ button:hover:before {
   
   <div class="buttons">
     <button id="yes-btn">Je change d'avis ! 💖</button>
-    <button id="no-btn" onclick="moveButton()">Je suis sûre... 😔</button>
+    <button id="no-btn">Je suis sûre... 😔</button>
   </div>
   
-  <div class="counter-message" id="counter">Tu as cliqué "Non" 10 fois... mon cœur se brise un peu plus à chaque fois</div>
+  <div class="counter-message" id="counter">Tu as cliqué "Non" 0 fois... mon cœur se brise un peu plus à chaque fois</div>
 </div>
 
 <script>
+// Fonction pour créer des éléments d'animation responsive
+function createResponsiveElement(className, properties) {
+  const element = document.createElement('div');
+  element.className = className;
+  
+  // Appliquer les propriétés
+  Object.keys(properties).forEach(key => {
+    if (key === 'style') {
+      Object.keys(properties.style).forEach(styleKey => {
+        element.style[styleKey] = properties.style[styleKey];
+      });
+    } else if (key === 'innerHTML') {
+      element.innerHTML = properties.innerHTML;
+    }
+  });
+  
+  return element;
+}
+
 // Créer des larmes qui tombent
 const rainBackground = document.getElementById('rainBackground');
-for(let i = 0; i < 20; i++) {
-  const tear = document.createElement('div');
-  tear.className = 'tear';
-  tear.style.left = Math.random() * 100 + '%';
-  tear.style.animationDelay = Math.random() * 3 + 's';
-  tear.style.width = Math.random() * 5 + 3 + 'px';
-  tear.style.height = Math.random() * 10 + 10 + 'px';
+for(let i = 0; i < 15; i++) {
+  const tear = createResponsiveElement('tear', {
+    style: {
+      left: Math.random() * 100 + '%',
+      animationDelay: Math.random() * 3 + 's',
+      width: Math.random() * 4 + 3 + 'px',
+      height: Math.random() * 8 + 8 + 'px'
+    }
+  });
   rainBackground.appendChild(tear);
 }
 
 // Créer des cœurs brisés
-for(let i = 0; i < 10; i++) {
-  const heart = document.createElement('div');
-  heart.className = 'broken-heart';
-  heart.innerHTML = '💔';
-  heart.style.left = Math.random() * 100 + '%';
-  heart.style.animationDelay = Math.random() * 4 + 's';
-  heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-  heart.style.color = '#ff4d6d';
+for(let i = 0; i < 8; i++) {
+  const heart = createResponsiveElement('broken-heart', {
+    innerHTML: '💔',
+    style: {
+      left: Math.random() * 100 + '%',
+      animationDelay: Math.random() * 4 + 's',
+      fontSize: Math.random() * 15 + 15 + 'px',
+      color: '#ff4d6d'
+    }
+  });
   rainBackground.appendChild(heart);
 }
 
 // Cœurs qui s'estompent
-for(let i = 0; i < 15; i++) {
-  const heart = document.createElement('div');
-  heart.className = 'fading-heart';
-  heart.innerHTML = '💔';
-  heart.style.left = Math.random() * 100 + '%';
-  heart.style.top = Math.random() * 100 + '%';
-  heart.style.animationDelay = Math.random() * 6 + 's';
-  heart.style.color = '#ff8fab';
+for(let i = 0; i < 10; i++) {
+  const heart = createResponsiveElement('fading-heart', {
+    innerHTML: '💔',
+    style: {
+      left: Math.random() * 100 + '%',
+      top: Math.random() * 100 + '%',
+      animationDelay: Math.random() * 6 + 's',
+      color: '#ff8fab'
+    }
+  });
   rainBackground.appendChild(heart);
 }
 
 // Nuages de pluie
-for(let i = 0; i < 5; i++) {
-  const cloud = document.createElement('div');
-  cloud.className = 'rain-cloud';
-  cloud.style.left = Math.random() * 100 + '%';
-  cloud.style.opacity = Math.random() * 0.2 + 0.1;
-  cloud.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+for(let i = 0; i < 4; i++) {
+  const cloud = createResponsiveElement('rain-cloud', {
+    style: {
+      left: Math.random() * 100 + '%',
+      opacity: Math.random() * 0.2 + 0.1,
+      transform: `scale(${Math.random() * 0.5 + 0.5})`
+    }
+  });
   rainBackground.appendChild(cloud);
 }
 
@@ -347,14 +567,15 @@ document.getElementById('yes-btn').addEventListener('click', function() {
   this.style.transform = "scale(1.1)";
   
   // Ajouter des cœurs joyeux
-  for(let i = 0; i < 20; i++) {
+  for(let i = 0; i < 15; i++) {
     const heart = document.createElement('div');
     heart.innerHTML = '💖';
-    heart.style.position = 'absolute';
+    heart.style.position = 'fixed';
     heart.style.left = Math.random() * 100 + '%';
     heart.style.top = Math.random() * 100 + '%';
-    heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+    heart.style.fontSize = Math.random() * 20 + 15 + 'px';
     heart.style.opacity = '0.7';
+    heart.style.zIndex = '100';
     heart.style.animation = 'fadeOut 2s forwards';
     document.body.appendChild(heart);
     
@@ -388,20 +609,21 @@ function moveButton() {
   const noBtn = document.getElementById('no-btn');
   
   // Mettre à jour le message
-  if (noCount < messages.length) {
-    counterElement.textContent = messages[noCount];
-  } else {
-    counterElement.textContent = `${noCount} refus... arrête s'il te plaît 😭`;
-  }
+  const messageIndex = Math.min(noCount, messages.length - 1);
+  counterElement.textContent = messages[messageIndex];
   
-  // Déplacer le bouton aléatoirement
-  const maxX = window.innerWidth - noBtn.offsetWidth;
-  const maxY = window.innerHeight - noBtn.offsetHeight;
+  // Calculer la position maximale disponible
+  const container = document.querySelector('.container');
+  const containerRect = container.getBoundingClientRect();
   
-  const randomX = Math.random() * maxX;
-  const randomY = Math.random() * maxY;
+  // Déplacer le bouton aléatoirement dans le conteneur
+  const maxX = containerRect.width - noBtn.offsetWidth - 20;
+  const maxY = containerRect.height - noBtn.offsetHeight - 20;
   
-  noBtn.style.position = 'fixed';
+  const randomX = Math.max(10, Math.random() * maxX);
+  const randomY = Math.max(10, Math.random() * maxY);
+  
+  noBtn.style.position = 'absolute';
   noBtn.style.left = randomX + 'px';
   noBtn.style.top = randomY + 'px';
   
@@ -424,62 +646,75 @@ function moveButton() {
   }
   
   // Ajouter une larme supplémentaire
-  const tear = document.createElement('div');
-  tear.className = 'tear';
-  tear.style.left = Math.random() * 100 + '%';
-  tear.style.animationDelay = '0s';
-  tear.style.width = '8px';
-  tear.style.height = '15px';
+  const tear = createResponsiveElement('tear', {
+    style: {
+      left: Math.random() * 100 + '%',
+      animationDelay: '0s',
+      width: '6px',
+      height: '12px'
+    }
+  });
   rainBackground.appendChild(tear);
   
   // Si trop de clics, forcer le "oui"
-  if (noCount >= 15) {
-    alert("D'accord, d'accord ! Je vais considérer que c'est un OUI ! 💖");
-    window.location.href = 'oui.html';
+  if (noCount >= 10) {
+    setTimeout(() => {
+      alert("D'accord, d'accord ! Je vais considérer que c'est un OUI ! 💖");
+      window.location.href = 'oui.html';
+    }, 500);
   }
 }
 
-// Animation de larmes au survol du titre
-document.querySelector('h1').addEventListener('mouseover', function() {
-  for(let i = 0; i < 3; i++) {
-    const tear = document.createElement('div');
-    tear.className = 'tear';
-    tear.style.left = (50 + Math.random() * 20 - 10) + '%';
-    tear.style.animationDelay = '0s';
-    tear.style.width = '6px';
-    tear.style.height = '12px';
-    rainBackground.appendChild(tear);
+// Initialiser l'événement click sur le bouton "Non"
+document.getElementById('no-btn').addEventListener('click', moveButton);
+
+// Animation de larmes au survol du titre (uniquement sur desktop)
+if (window.innerWidth > 768) {
+  document.querySelector('h1').addEventListener('mouseover', function() {
+    for(let i = 0; i < 3; i++) {
+      const tear = createResponsiveElement('tear', {
+        style: {
+          left: (50 + Math.random() * 20 - 10) + '%',
+          animationDelay: '0s',
+          width: '6px',
+          height: '12px'
+        }
+      });
+      rainBackground.appendChild(tear);
+    }
+  });
+}
+
+// Optimisation pour les performances sur mobile
+let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (isMobile) {
+  // Réduire le nombre d'animations sur mobile
+  const animations = document.querySelectorAll('.tear, .broken-heart, .fading-heart');
+  animations.forEach((anim, index) => {
+    if (index > 15) {
+      anim.style.display = 'none';
+    }
+  });
+}
+
+// Redimensionnement responsive
+function handleResize() {
+  const noBtn = document.getElementById('no-btn');
+  if (noBtn.style.position === 'absolute') {
+    // Réinitialiser la position si le bouton est déplacé
+    noBtn.style.position = '';
+    noBtn.style.left = '';
+    noBtn.style.top = '';
   }
+}
+
+// Écouter le redimensionnement
+window.addEventListener('resize', handleResize);
+window.addEventListener('orientationchange', function() {
+  setTimeout(handleResize, 100);
 });
 
-// Effet sonore triste (optionnel)
-function playSadSound() {
-  try {
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    const oscillator = audioContext.createOscillator();
-    const gainNode = audioContext.createGain();
-    
-    oscillator.connect(gainNode);
-    gainNode.connect(audioContext.destination);
-    
-    oscillator.frequency.setValueAtTime(392, audioContext.currentTime); // Sol
-    oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // Fa
-    oscillator.frequency.setValueAtTime(329.63, audioContext.currentTime + 0.2); // Mi
-    
-    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
-    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-    
-    oscillator.start(audioContext.currentTime);
-    oscillator.stop(audioContext.currentTime + 0.5);
-  } catch (e) {
-    // Audio non supporté
-  }
-}
-
-// Jouer un son triste au chargement
-setTimeout(playSadSound, 1000);
-
-// Ajouter une animation CSS pour fadeOut
+// Ajouter l'animation fadeOut au DOM
 const style = document.createElement('style');
 style.textContent = `
   @keyframes fadeOut {
