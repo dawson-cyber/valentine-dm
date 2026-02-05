@@ -2,71 +2,444 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Entre ton prénom 💗</title>
-
 <style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(180deg,#ffccd5,#ffb3c6);
-    font-family:Arial, Helvetica, sans-serif;
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.container{
-    background:white;
-    padding:40px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 15px 30px rgba(0,0,0,0.15);
-    width:300px;
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffccd5 0%, #ffb3c6 50%, #ff8fab 100%);
+    font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
 }
 
-h2{
-    color:#ff4d6d;
+/* Cœurs flottants en arrière-plan */
+.floating-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
 }
 
-input{
-    width:80%;
-    padding:12px;
-    border-radius:15px;
-    border:1px solid #ff4d6d;
-    margin-top:15px;
-    text-align:center;
+.floating-heart {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.3;
+    animation: float 15s linear infinite;
 }
 
-button{
-    margin-top:20px;
-    padding:12px 25px;
-    border:none;
-    border-radius:20px;
-    background:#ff4d6d;
-    color:white;
-    cursor:pointer;
-    font-weight:bold;
-    transition:0.3s;
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.3;
+    }
+    90% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg) scale(0.5);
+        opacity: 0;
+    }
 }
 
-button:hover{
-    background:#ff1e4d;
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: clamp(30px, 5vw, 50px);
+    border-radius: clamp(20px, 4vw, 30px);
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    width: min(90%, 400px);
+    z-index: 10;
+    position: relative;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    color: #ff4d6d;
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    margin-bottom: clamp(20px, 4vw, 30px);
+    font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+}
+
+.subtitle {
+    color: #666;
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: clamp(25px, 5vw, 35px);
+}
+
+input {
+    width: 100%;
+    padding: clamp(12px, 3vw, 16px);
+    border-radius: 15px;
+    border: 2px solid #ff8fab;
+    font-size: clamp(16px, 2vw, 18px);
+    text-align: center;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+input:focus {
+    outline: none;
+    border-color: #ff4d6d;
+    box-shadow: 0 0 0 3px rgba(255, 77, 109, 0.2);
+    transform: scale(1.02);
+}
+
+input::placeholder {
+    color: #ff8fab;
+    opacity: 0.7;
+}
+
+button {
+    width: 100%;
+    padding: clamp(14px, 3vw, 18px);
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #ff4d6d, #ff1e4d);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: clamp(16px, 2vw, 18px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(255, 77, 109, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+}
+
+button:hover:before {
+    left: 100%;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff1e4d, #e60039);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 77, 109, 0.4);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+}
+
+.heart-icon {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    margin-bottom: clamp(15px, 3vw, 25px);
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Instructions pour mobile */
+.mobile-instructions {
+    display: none;
+    color: #666;
+    font-size: 0.85rem;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* Responsive pour très petits écrans (téléphones < 400px) */
+@media (max-width: 400px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 25px 20px;
+    }
+    
+    .mobile-instructions {
+        display: block;
+    }
+}
+
+/* Responsive pour tablettes (entre 768px et 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        width: min(70%, 450px);
+        padding: 40px;
+    }
+    
+    h2 {
+        font-size: 2.5rem;
+    }
+    
+    input, button {
+        font-size: 20px;
+        padding: 18px;
+    }
+}
+
+/* Responsive pour ordinateurs (> 1024px) */
+@media (min-width: 1025px) {
+    .container {
+        width: min(30%, 450px);
+    }
+    
+    .container:hover {
+        transform: translateY(-5px);
+        transition: transform 0.3s ease;
+    }
+}
+
+/* Pour les écrans très larges (> 1440px) */
+@media (min-width: 1440px) {
+    .container {
+        width: min(25%, 500px);
+        padding: 60px;
+    }
+    
+    h2 {
+        font-size: 2.8rem;
+    }
+}
+
+/* Pour les écrans en mode paysage (landscape) sur mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    body {
+        padding: 10px;
+        min-height: auto;
+    }
+    
+    .container {
+        width: min(80%, 500px);
+        padding: 25px;
+        margin: 20px auto;
+    }
+    
+    h2 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+}
+
+/* Support du thème sombre */
+@media (prefers-color-scheme: dark) {
+    .container {
+        background: rgba(30, 30, 30, 0.95);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    h2 {
+        color: #ff8fab;
+    }
+    
+    input {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #ff4d6d;
+        color: #fff;
+    }
+    
+    input::placeholder {
+        color: #ffb3c6;
+    }
+    
+    .subtitle {
+        color: #ccc;
+    }
+}
+
+/* Animations au chargement */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.container {
+    animation: slideIn 0.6s ease-out;
 }
 </style>
 </head>
 
 <body>
 
+<!-- Cœurs flottants en arrière-plan -->
+<div class="floating-hearts" id="floatingHearts"></div>
+
 <div class="container">
-    <h2>Entre ton prénom 💗</h2>
-
+    <div class="heart-icon">💗</div>
+    
+    <h2>Entre ton prénom</h2>
+    
+    <p class="subtitle">Pour une surprise spéciale 💖</p>
+    
     <form action="ours.html" method="GET">
-        <input type="text" name="username" placeholder="Ton prénom..." required>
-        <br>
-        <button type="submit">Entrer</button>
+        <div class="form-group">
+            <input type="text" 
+                   name="username" 
+                   placeholder="Ton prénom..." 
+                   required
+                   autocomplete="off"
+                   autocapitalize="words">
+        </div>
+        
+        <button type="submit">
+            Découvrir la surprise 💝
+        </button>
     </form>
-
+    
+    <p class="mobile-instructions">Tape ton prénom et appuie sur le bouton rose !</p>
 </div>
+
+<script>
+// Générer des cœurs flottants
+const floatingHearts = document.getElementById('floatingHearts');
+const heartEmojis = ['💖', '💗', '💓', '💕', '💞'];
+
+for (let i = 0; i < 15; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.animationDelay = Math.random() * 15 + 's';
+    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+    heart.style.color = `hsl(${Math.random() * 30 + 330}, 100%, 70%)`; // Tons roses
+    
+    floatingHearts.appendChild(heart);
+}
+
+// Focus automatique sur l'input sur desktop
+if (window.innerWidth > 768) {
+    document.querySelector('input').focus();
+}
+
+// Validation du formulaire
+document.querySelector('form').addEventListener('submit', function(e) {
+    const input = document.querySelector('input[name="username"]');
+    const name = input.value.trim();
+    
+    if (name.length === 0) {
+        e.preventDefault();
+        input.style.borderColor = '#ff3333';
+        input.style.boxShadow = '0 0 0 3px rgba(255, 51, 51, 0.2)';
+        input.placeholder = 'Entre ton prénom ici !';
+        setTimeout(() => {
+            input.style.borderColor = '#ff8fab';
+            input.style.boxShadow = 'none';
+            input.placeholder = 'Ton prénom...';
+        }, 2000);
+        return false;
+    }
+    
+    // Animation de validation
+    const button = document.querySelector('button');
+    button.innerHTML = 'Préparation de la surprise... 💫';
+    button.style.background = 'linear-gradient(135deg, #00cc66, #00b359)';
+    
+    // Petite animation de chargement
+    setTimeout(() => {
+        button.innerHTML = 'C\'est parti ! 🎉';
+    }, 800);
+    
+    return true;
+});
+
+// Effet de saisie
+const input = document.querySelector('input');
+input.addEventListener('input', function() {
+    if (this.value.length > 0) {
+        this.style.borderColor = '#ff4d6d';
+    } else {
+        this.style.borderColor = '#ff8fab';
+    }
+});
+
+// Détection du clavier virtuel sur mobile
+if ('virtualKeyboard' in navigator) {
+    const container = document.querySelector('.container');
+    
+    navigator.virtualKeyboard.addEventListener('geometrychange', (event) => {
+        if (event.target.geometry.height > 0) {
+            // Clavier visible
+            container.style.marginBottom = '200px';
+            container.style.transition = 'margin-bottom 0.3s ease';
+        } else {
+            // Clavier caché
+            container.style.marginBottom = '0';
+        }
+    });
+}
+
+// Redimensionnement fluide
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        // Réajuster les tailles si nécessaire
+        const container = document.querySelector('.container');
+        container.style.transition = 'none';
+        
+        setTimeout(() => {
+            container.style.transition = '';
+        }, 100);
+    }, 250);
+});
+</script>
 
 </body>
 </html>
