@@ -78,7 +78,7 @@ h1 {
 /* Conteneur pour les messages avec transition */
 .message-container {
   position: relative;
-  height: 90px;
+  height: 100px;
   margin: clamp(20px, 4vw, 30px) auto;
   max-width: 600px;
   overflow: hidden;
@@ -252,31 +252,6 @@ h1 {
   }
 }
 
-.return-button {
-  margin-top: clamp(25px, 5vw, 40px);
-  padding: clamp(12px, 2.5vw, 15px) clamp(25px, 5vw, 40px);
-  background: linear-gradient(135deg, #ff4d6d, #ff1e4d);
-  color: white;
-  border: none;
-  border-radius: 50px;
-  font-size: clamp(1rem, 2vw, 1.2rem);
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 20px rgba(255, 30, 77, 0.3);
-  display: inline-block;
-}
-
-.return-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 15px 30px rgba(255, 30, 77, 0.5);
-  background: linear-gradient(135deg, #ff1e4d, #e60039);
-}
-
-.return-button:active {
-  transform: scale(0.95);
-}
-
 /* Responsive pour très petits écrans */
 @media (max-width: 480px) {
   .container {
@@ -313,11 +288,6 @@ h1 {
     width: 100%;
     max-width: 280px;
     margin: 0 auto;
-  }
-  
-  .return-button {
-    width: 100%;
-    max-width: 280px;
   }
 }
 
@@ -357,11 +327,6 @@ h1 {
   
   .nav-controls {
     margin: 15px auto;
-  }
-  
-  .return-button {
-    margin-top: 20px;
-    padding: 12px 30px;
   }
 }
 
@@ -433,7 +398,6 @@ h1 {
     animation: none;
   }
   
-  .return-button:hover,
   .nav-btn:hover {
     transform: none;
   }
@@ -473,27 +437,6 @@ h1 {
 html, body {
   max-width: 100%;
   overflow-x: hidden;
-}
-
-/* Style pour le bouton de retour */
-.return-button {
-  position: relative;
-  overflow: hidden;
-}
-
-.return-button:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-  transition: 0.5s;
-}
-
-.return-button:hover:before {
-  left: 100%;
 }
 
 /* Amélioration de la performance sur mobile */
@@ -574,6 +517,8 @@ html, body {
     <div class="indicator-dot" data-index="3"></div>
     <div class="indicator-dot" data-index="4"></div>
   </div>
+</div>
+
 <div class="floating-hearts" id="floatingHearts"></div>
 
 <script>
@@ -794,7 +739,7 @@ window.addEventListener('orientationchange', function() {
 
 // Touch-friendly pour mobile
 if (isMobile) {
-  const buttons = document.querySelectorAll('.nav-btn, .return-button');
+  const buttons = document.querySelectorAll('.nav-btn');
   buttons.forEach(button => {
     button.style.minHeight = '44px';
     button.style.display = 'flex';
