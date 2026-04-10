@@ -376,7 +376,7 @@ for (let i = 0; i < numHearts; i++) {
 const params = new URLSearchParams(window.location.search);
 const name = params.get("username");
 const message = document.getElementById("valentineName");
-message.innerHTML = name ? `${name} 💌<br>Veux-tu être ma Valentine ?` : "Veux-tu être ma Valentine ? 💌";
+message.innerHTML = name ? `${name} 💌<br>Veux-tu être ma copine ?` : "Veux-tu être ma copine ? 💌";
 
 // Boutons interactifs
 let noCount = 0;
@@ -424,7 +424,7 @@ yesBtn.addEventListener("click", ()=>{
   // Animation du message
   const messageDiv = document.getElementById("valentineName");
   messageDiv.style.background = "linear-gradient(135deg, #00cc66, #00b359)";
-  messageDiv.innerHTML = name ? `Génial ${name} ! 💖<br>Tu as rendu mon jour !` : "Génial ! 💖<br>Tu as rendu mon jour !";
+  messageDiv.innerHTML = name ? `Génial ${name} ! 💖<br>Merci je ferais de mon mieux !` : "Génial ! 💖<br> Merci je ferais de mon mieux !";
   
   // Redirection
   setTimeout(() => {
