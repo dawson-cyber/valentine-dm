@@ -471,10 +471,10 @@ html, body {
 
 <div class="container">
   <div class="sad-face">😢</div>
-  <h1>Tu veux me briser le cœur comme ça ?</h1>
+  <h1>Un non ?</h1>
   
   <div class="message">
-    C'était pourtant un "oui" qui aurait rendu cette journée magique...<br>
+   Tu as tes raisons sur le non et je comprends, je respecte ta décision<br>
     Mais peut-être que tu veux reconsidérer ta décision ?
   </div>
   
@@ -601,7 +601,7 @@ const messages = [
   "7 refus... la tristesse m'envahit",
   "8 refus... plus que de la douleur maintenant",
   "9 refus... je vais finir en larmes",
-  "10 refus... c'est trop, je suis brisé(e)"
+  "10 refus... c'est trop, je suis brisé mais ça va quand même"
 ];
 
 function moveButton() {
@@ -629,16 +629,16 @@ function moveButton() {
   
   // Changement de texte progressif
   const sadTexts = [
-    "Je suis sûr(e)... 😔",
+    "Je suis sûr... 😔",
     "Vraiment ? 😟",
     "Sans hésitation ? 😥",
     "C'est ton dernier mot ? 😭",
     "Tu ne regrettes pas ? 💔",
     "Pitié... 🥺",
     "Arrête ça 😢",
-    "Tu es cruel(le) 😭",
+    "Tu es cruel 😭",
     "Mon cœur saigne 💔",
-    "Je meurs à petit feu 💀"
+    "Je meurs à petit feu et c'est drôle"
   ];
   
   if (noCount < sadTexts.length) {
@@ -659,7 +659,7 @@ function moveButton() {
   // Si trop de clics, forcer le "oui"
   if (noCount >= 10) {
     setTimeout(() => {
-      alert("D'accord, d'accord ! Je vais considérer que c'est un OUI ! 💖");
+      alert("D'accord, d'accord ! Je vais considérer que c'est un OUI mais avec un goût amer de non! 💖");
       window.location.href = 'oui.html';
     }, 500);
   }
