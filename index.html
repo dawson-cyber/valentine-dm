@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> prenom💗</title>
 <style>
-/* Reset et base */
 * {
     margin: 0;
     padding: 0;
@@ -24,7 +23,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Cœurs flottants en arrière-plan */
 .floating-hearts {
     position: fixed;
     top: 0;
@@ -43,20 +41,10 @@ body {
 }
 
 @keyframes float {
-    0% {
-        transform: translateY(100vh) rotate(0deg) scale(0.5);
-        opacity: 0;
-    }
-    10% {
-        opacity: 0.3;
-    }
-    90% {
-        opacity: 0.3;
-    }
-    100% {
-        transform: translateY(-100px) rotate(360deg) scale(0.5);
-        opacity: 0;
-    }
+    0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+    10% { opacity: 0.3; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-100px) rotate(360deg) scale(0.5); opacity: 0; }
 }
 
 .container {
@@ -70,18 +58,12 @@ body {
     position: relative;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: fadeIn 0.8s ease-out;
+    animation: slideIn 0.6s ease-out;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
 h2 {
@@ -154,9 +136,7 @@ button:before {
     transition: 0.5s;
 }
 
-button:hover:before {
-    left: 100%;
-}
+button:hover:before { left: 100%; }
 
 button:hover {
     background: linear-gradient(135deg, #ff1e4d, #e60039);
@@ -181,7 +161,27 @@ button:active {
     50% { transform: scale(1.1); }
 }
 
-/* Instructions pour mobile */
+/* Message d'erreur */
+.error-message {
+    display: none;
+    color: #ff3333;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    animation: shake 0.4s ease;
+}
+
+.error-message.visible {
+    display: block;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+}
+
 .mobile-instructions {
     display: none;
     color: #666;
@@ -190,134 +190,47 @@ button:active {
     font-style: italic;
 }
 
-/* Responsive pour très petits écrans (téléphones < 400px) */
 @media (max-width: 400px) {
-    body {
-        padding: 10px;
-    }
-    
-    .container {
-        width: 95%;
-        padding: 25px 20px;
-    }
-    
-    .mobile-instructions {
-        display: block;
-    }
+    body { padding: 10px; }
+    .container { width: 95%; padding: 25px 20px; }
+    .mobile-instructions { display: block; }
 }
 
-/* Responsive pour tablettes (entre 768px et 1024px) */
 @media (min-width: 768px) and (max-width: 1024px) {
-    .container {
-        width: min(70%, 450px);
-        padding: 40px;
-    }
-    
-    h2 {
-        font-size: 2.5rem;
-    }
-    
-    input, button {
-        font-size: 20px;
-        padding: 18px;
-    }
+    .container { width: min(70%, 450px); padding: 40px; }
+    h2 { font-size: 2.5rem; }
+    input, button { font-size: 20px; padding: 18px; }
 }
 
-/* Responsive pour ordinateurs (> 1024px) */
 @media (min-width: 1025px) {
-    .container {
-        width: min(30%, 450px);
-    }
-    
-    .container:hover {
-        transform: translateY(-5px);
-        transition: transform 0.3s ease;
-    }
+    .container { width: min(30%, 450px); }
+    .container:hover { transform: translateY(-5px); transition: transform 0.3s ease; }
 }
 
-/* Pour les écrans très larges (> 1440px) */
 @media (min-width: 1440px) {
-    .container {
-        width: min(25%, 500px);
-        padding: 60px;
-    }
-    
-    h2 {
-        font-size: 2.8rem;
-    }
+    .container { width: min(25%, 500px); padding: 60px; }
+    h2 { font-size: 2.8rem; }
 }
 
-/* Pour les écrans en mode paysage (landscape) sur mobile */
 @media (max-height: 600px) and (orientation: landscape) {
-    body {
-        padding: 10px;
-        min-height: auto;
-    }
-    
-    .container {
-        width: min(80%, 500px);
-        padding: 25px;
-        margin: 20px auto;
-    }
-    
-    h2 {
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-    
-    .form-group {
-        margin-bottom: 20px;
-    }
+    body { padding: 10px; min-height: auto; }
+    .container { width: min(80%, 500px); padding: 25px; margin: 20px auto; }
+    h2 { font-size: 1.8rem; margin-bottom: 15px; }
+    .form-group { margin-bottom: 20px; }
 }
 
-/* Support du thème sombre */
 @media (prefers-color-scheme: dark) {
-    .container {
-        background: rgba(30, 30, 30, 0.95);
-        color: #fff;
-        border-color: rgba(255, 255, 255, 0.1);
-    }
-    
-    h2 {
-        color: #ff8fab;
-    }
-    
-    input {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: #ff4d6d;
-        color: #fff;
-    }
-    
-    input::placeholder {
-        color: #ffb3c6;
-    }
-    
-    .subtitle {
-        color: #ccc;
-    }
-}
-
-/* Animations au chargement */
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-.container {
-    animation: slideIn 0.6s ease-out;
+    .container { background: rgba(30, 30, 30, 0.95); color: #fff; border-color: rgba(255, 255, 255, 0.1); }
+    h2 { color: #ff8fab; }
+    input { background: rgba(255, 255, 255, 0.1); border-color: #ff4d6d; color: #fff; }
+    input::placeholder { color: #ffb3c6; }
+    .subtitle { color: #ccc; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- Cœurs flottants en arrière-plan -->
 <div class="floating-hearts" id="floatingHearts"></div>
 
 <div class="container">
@@ -327,22 +240,24 @@ button:active {
     
     <p class="subtitle">Pour une surprise spéciale 💖</p>
     
-    <form action="ours.html" method="GET">
+    <form action="ours.html" method="GET" id="prenomForm">
         <div class="form-group">
             <input type="text" 
                    name="username" 
+                   id="prenomInput"
                    placeholder="Ton prénom..." 
                    required
                    autocomplete="off"
                    autocapitalize="words">
+            <p class="error-message" id="errorMsg">Ce n'est pas toi,je veux Myriam !!!</p>
         </div>
         
-        <button type="submit">
+        <button type="submit" id="submitBtn">
             Découvrir la surprise 💝
         </button>
     </form>
     
-    <p class="mobile-instructions">Tape ton prénom et appuie sur le bouton rose ! C'est juste pour Myriam</p>
+    <p class="mobile-instructions">Tape ton prénom et appuie sur le bouton rose !</p>
 </div>
 
 <script>
@@ -354,95 +269,83 @@ for (let i = 0; i < 15; i++) {
     const heart = document.createElement('div');
     heart.className = 'floating-heart';
     heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-    
     heart.style.left = Math.random() * 100 + '%';
     heart.style.animationDelay = Math.random() * 15 + 's';
     heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-    heart.style.color = `hsl(${Math.random() * 30 + 330}, 100%, 70%)`; // Tons roses
-    
     floatingHearts.appendChild(heart);
 }
 
-// Focus automatique sur l'input sur desktop
+// Focus automatique sur desktop
 if (window.innerWidth > 768) {
-    document.querySelector('input').focus();
+    document.getElementById('prenomInput').focus();
 }
 
-// Validation du formulaire
-document.querySelector('form').addEventListener('submit', function(e) {
-    const input = document.querySelector('input[name="username"]');
-    const name = input.value.trim();
-    
-    if (name.length === 0) {
-        e.preventDefault();
+// ✅ Fonction de vérification du prénom
+function verifierPrenom(prenom) {
+    const prenomNettoye = prenom.trim().toLowerCase();
+    return prenomNettoye === 'myriam';
+}
+
+// Gestion de la soumission du formulaire
+document.getElementById('prenomForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const input = document.getElementById('prenomInput');
+    const errorMsg = document.getElementById('errorMsg');
+    const btn = document.getElementById('submitBtn');
+    const prenom = input.value;
+
+    // Vérification prénom vide
+    if (prenom.trim().length === 0) {
         input.style.borderColor = '#ff3333';
-        input.style.boxShadow = '0 0 0 3px rgba(255, 51, 51, 0.2)';
         input.placeholder = 'Entre ton prénom ici !';
         setTimeout(() => {
             input.style.borderColor = '#ff8fab';
-            input.style.boxShadow = 'none';
             input.placeholder = 'Ton prénom...';
         }, 2000);
-        return false;
+        return;
     }
-    if (name === "Myriam"){
-        console.log("merci Myriam");
-    }else {
-        console.log("Mauvais prenom");
-    } return false;
-    
-    // Animation de validation
-    const button = document.querySelector('button');
-    button.innerHTML = 'Préparation de la surprise... 💫';
-    button.style.background = 'linear-gradient(135deg, #00cc66, #00b359)';
-    
-    // Petite animation de chargement
+
+    // ✅ Vérification que le prénom est bien Myriam
+    if (!verifierPrenom(prenom)) {
+        input.style.borderColor = '#ff3333';
+        input.style.boxShadow = '0 0 0 3px rgba(255, 51, 51, 0.2)';
+
+        // Afficher le message d'erreur avec animation
+        errorMsg.classList.remove('visible');
+        void errorMsg.offsetWidth; // reset animation
+        errorMsg.classList.add('visible');
+
+        setTimeout(() => {
+            input.style.borderColor = '#ff8fab';
+            input.style.boxShadow = 'none';
+            errorMsg.classList.remove('visible');
+        }, 3000);
+        return;
+    }
+
+    // ✅ Prénom correct : animation puis redirection
+    errorMsg.classList.remove('visible');
+    input.style.borderColor = '#00cc66';
+    btn.innerHTML = 'Préparation de la surprise... 💫';
+    btn.style.background = 'linear-gradient(135deg, #00cc66, #00b359)';
+
     setTimeout(() => {
-        button.innerHTML = 'C\'est parti ! 🎉';
+        btn.innerHTML = 'C\'est parti ! 🎉';
     }, 800);
-    
-    return true;
+
+    setTimeout(() => {
+        document.getElementById('prenomForm').submit();
+    }, 1200);
 });
 
 // Effet de saisie
-const input = document.querySelector('input');
+const input = document.getElementById('prenomInput');
 input.addEventListener('input', function() {
-    if (this.value.length > 0) {
-        this.style.borderColor = '#ff4d6d';
-    } else {
-        this.style.borderColor = '#ff8fab';
-    }
-});
-
-// Détection du clavier virtuel sur mobile
-if ('virtualKeyboard' in navigator) {
-    const container = document.querySelector('.container');
-    
-    navigator.virtualKeyboard.addEventListener('geometrychange', (event) => {
-        if (event.target.geometry.height > 0) {
-            // Clavier visible
-            container.style.marginBottom = '200px';
-            container.style.transition = 'margin-bottom 0.3s ease';
-        } else {
-            // Clavier caché
-            container.style.marginBottom = '0';
-        }
-    });
-}
-
-// Redimensionnement fluide
-let resizeTimer;
-window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-        // Réajuster les tailles si nécessaire
-        const container = document.querySelector('.container');
-        container.style.transition = 'none';
-        
-        setTimeout(() => {
-            container.style.transition = '';
-        }, 100);
-    }, 250);
+    const errorMsg = document.getElementById('errorMsg');
+    errorMsg.classList.remove('visible');
+    this.style.borderColor = this.value.length > 0 ? '#ff4d6d' : '#ff8fab';
+    this.style.boxShadow = 'none';
 });
 </script>
 
