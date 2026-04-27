@@ -385,10 +385,10 @@ document.querySelector('form').addEventListener('submit', function(e) {
         }, 2000);
         return false;
     }
-    if (${name} != "Myriam"){
-        console.log("Mauvais prenom");
-    }else {
+    if (name === "Myriam"){
         console.log("merci Myriam");
+    }else {
+        console.log("Mauvais prenom");
     } return false;
     
     // Animation de validation
