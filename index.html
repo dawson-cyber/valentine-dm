@@ -362,13 +362,6 @@ for (let i = 0; i < 15; i++) {
     
     floatingHearts.appendChild(heart);
 }
-    //pour le nom
-
-    if (name != "Myriam"){
-        console.log("Mauvais prenom");
-    }else {
-        console.log("merci Myriam")
-    } return false
 
 // Focus automatique sur l'input sur desktop
 if (window.innerWidth > 768) {
@@ -392,6 +385,11 @@ document.querySelector('form').addEventListener('submit', function(e) {
         }, 2000);
         return false;
     }
+    if (${name} != "Myriam"){
+        console.log("Mauvais prenom");
+    }else {
+        console.log("merci Myriam");
+    } return false;
     
     // Animation de validation
     const button = document.querySelector('button');
